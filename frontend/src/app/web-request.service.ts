@@ -36,14 +36,11 @@ export class WebRequestService {
         observe: 'response'
       });
   }
-  signup(userName: string, email: string, password: string, city: string, lat: number, lng: number) {
+  signup(values:Object) {
     return this.http.post(`${this.ROOT_URL}/users`, {
-      userName,
-      email,
-      password,
-      city,
-      lat,
-      lng
+    values
+   
+    
     }, {
         observe: 'response'
       });
