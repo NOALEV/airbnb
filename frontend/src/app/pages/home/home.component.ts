@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { MediaChange, MediaObserver } from '@angular/flex-layout'; 
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+import { SocialUser } from "angularx-social-login";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -30,7 +31,10 @@ export class HomeComponent implements OnInit {
   public featuredProperties: Property[];
 
   public settings: Settings;
+  user: SocialUser;
+  loggedIn: boolean;
   constructor(public appSettings:AppSettings, public appService:AppService, public mediaObserver: MediaObserver) {
+    
     this.settings = this.appSettings.settings;
 
     this.watcher = mediaObserver.media$.subscribe((change: MediaChange) => {
@@ -48,8 +52,10 @@ export class HomeComponent implements OnInit {
         this.viewCol = 25;
       }
     });
+    
 
   }
+  
 
   ngOnInit() {  
     this.getSlides();
@@ -58,6 +64,8 @@ export class HomeComponent implements OnInit {
     //    console.log('mobile version -XS')
     // }
     this.getFeaturedProperties();
+
+    
   }
 
   ngDoCheck(){

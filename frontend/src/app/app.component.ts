@@ -12,9 +12,11 @@ export class AppComponent {
   public settings: Settings;
   constructor(public appSettings:AppSettings, public router:Router){
     this.settings = this.appSettings.settings;
+    
   }
-
+  
   ngAfterViewInit(){ 
+    
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {   
         setTimeout(() => {

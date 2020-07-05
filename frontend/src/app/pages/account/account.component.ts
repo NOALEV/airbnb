@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import {User} from 'src/app/models/user.model';
+import {UserService} from 'src/app/user.service';
 
 @Component({
   selector: 'app-account',
@@ -20,7 +22,8 @@ export class AccountComponent implements OnInit {
     { name: 'Submit Property', href: '/submit-property', icon: 'add_circle' },  
     { name: 'Logout', href: '/login', icon: 'power_settings_new' },    
   ]; 
-  constructor(public router:Router) { }
+
+  constructor(public router:Router,private userService: UserService) { }
 
   ngOnInit() {
     if(window.innerWidth < 960){
@@ -42,6 +45,21 @@ export class AccountComponent implements OnInit {
       }                
     });
   } 
+  getUser() {
+    
+    let user:User;
+    user= JSON.parse( localStorage.getItem('user')) ;
+    return user;
+
+  }
+  getPic()
+ {
+  let user:User;
+  user= JSON.parse( localStorage.getItem('user')) ;
+return user ?user.imageUrl :"";
+
+ }
+  
 
 
 }

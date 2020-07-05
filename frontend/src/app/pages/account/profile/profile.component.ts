@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { emailValidator, matchingPasswords } from 'src/app/theme/utils/app-validators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -44,6 +45,13 @@ export class ProfileComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.snackBar.open('Your password changed successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
     }
+  }
+  getUser() {
+    
+    let user:User;
+    user= JSON.parse( localStorage.getItem('user')) ;
+
+    return user;
   }
 
 }

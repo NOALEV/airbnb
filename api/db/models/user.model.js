@@ -29,6 +29,11 @@ const UserSchema = new mongoose.Schema({
         required:false
 
     },
+    imageUrl:{
+        type:String,
+        required:false
+
+    },
 
 
     sessions: [{

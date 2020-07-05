@@ -1,13 +1,15 @@
+<div  *ngIf="getUser()"> 
 <a mat-button [matMenuTriggerFor]="userMenu" #userMenuTrigger="matMenuTrigger">
     <mat-icon class="mat-icon-sm">person</mat-icon>
     <span fxShow="false" fxShow.gt-sm class="mx-1 uppercase">account</span> 
     <mat-icon class="mat-icon-sm caret">arrow_drop_down</mat-icon>
 </a>
-<mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before" class="app-menu-panel user-menu">
+
+<mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before"  class="app-menu-panel user-menu" >
     <span (mouseleave)="userMenuTrigger.closeMenu()">
-        <div fxLayout="row" fxLayoutAlign="start center" class="user-info">                   
-            <img src="assets/images/others/user.jpg" alt="user-image" width="50">
-            <p class="m-0">Emilio Verdines <br> <small><i>emilio_v</i></small></p>
+        <div fxLayout="row" fxLayoutAlign="start center" class="user-info" *ngIf="getUser()">                   
+            <img src="{{getPic()}}" appImgFallback  alt="user-image" width="50">
+            <p class="m-0" *ngIf="getUser()">{{getUser().username}}<br> <small><i></i></small></p>
         </div>
         <div class="divider"></div>
         <a mat-menu-item routerLink="/submit-property"> 
@@ -42,18 +44,21 @@
             <mat-icon class="mat-icon-sm">edit</mat-icon>
             <span>Edit Profile</span> 
         </a>
-        <a mat-menu-item routerLink="/lock-screen"> 
-            <mat-icon class="mat-icon-sm">lock</mat-icon>
-            <span>Lock screen</span> 
-        </a>
-        <a mat-menu-item routerLink="/faq"> 
-            <mat-icon class="mat-icon-sm">help</mat-icon>
-            <span>Help</span> 
-        </a>
+      
+      
         <div class="divider"></div>
         <a mat-menu-item routerLink="/login"> 
+
             <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
-            <span>Sign Out</span> 
+            <span (click)="logout()">Sign Out</span> 
         </a>
     </span>
 </mat-menu>  
+</div>
+
+
+<a mat-button  *ngIf="!getUser()" routerLink="/login">
+    <mat-icon class="mat-icon-sm">person</mat-icon>
+    <span fxShow="false" fxShow.gt-sm class="mx-1 uppercase">Login</span> 
+   
+</a>

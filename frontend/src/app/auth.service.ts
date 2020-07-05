@@ -12,13 +12,18 @@ export class AuthService {
 
   constructor(private webService: WebRequestService, private router: Router, private http: HttpClient) { }
 
-  login(email: string, password: string) {
-    return this.webService.login(email, password).pipe(
+  login(values:Object) {
+    return this.webService.login(values).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
         console.log(res.body);
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'), res.body.isAdmin, res.body.userName);
+        if(!res.body.imageUrl)
+        {
+          res.body.imageUrl="assets/images/others/user.jpg";
+        }
+        
+        this.setSession( res.headers.get('x-access-token'), res.headers.get('x-refresh-token'), res.body );
         console.log('LOGGED IN!');
       })
     );
@@ -30,11 +35,12 @@ export class AuthService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'), res.body.isAdmin, res.body.userName);
+        this.setSession( res.headers.get('x-access-token'), res.headers.get('x-refresh-token'),res.body);
         console.log('Successfully signed up and now logged in!');
       })
     );
   }
+ 
 
 
 
@@ -52,20 +58,16 @@ export class AuthService {
     return localStorage.getItem('x-refresh-token');
   }
 
-  getUserId() {
-    return localStorage.getItem('user-id');
-  }
-
-
+ 
+ 
 
   setAccessToken(accessToken: string) {
     localStorage.setItem('x-access-token', accessToken);
   }
 
-  private setSession(userId: string, accessToken: string, refreshToken: string, isAdmin: string, userName: string) {
-    localStorage.setItem('user-id', userId);
-    localStorage.setItem('isAdmin', isAdmin);
-    localStorage.setItem('userName', userName);
+  private setSession( accessToken: string, refreshToken: string,  user: any) {
+   
+    localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
 
@@ -73,7 +75,7 @@ export class AuthService {
 
 
   private removeSession() {
-    localStorage.removeItem('user-id');
+    localStorage.removeItem('user');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
   }
@@ -82,7 +84,7 @@ export class AuthService {
     return this.http.get(`${this.webService.ROOT_URL}/users/me/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken(),
-        _id: this.getUserId()
+       
       },
       observe: 'response'
     }).pipe(
