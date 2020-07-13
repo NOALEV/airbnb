@@ -4,6 +4,9 @@ import { MatStepper } from '@angular/material/stepper';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MapsAPILoader } from '@agm/core';
+import { ApartmentService } from 'src/app/apartment.service';
+import { Router } from '@angular/router';
+import { Apartment } from 'src/app/models/apartment.model';
 
 @Component({
   selector: 'app-submit-property',
@@ -27,7 +30,9 @@ export class SubmitPropertyComponent implements OnInit {
   constructor(public appService:AppService, 
               private fb: FormBuilder, 
               private mapsAPILoader: MapsAPILoader, 
-              private ngZone: NgZone) { }
+              private ngZone: NgZone,
+              private apartmentService: ApartmentService, private router: Router) { }
+              
 
   ngOnInit() {
     this.features = this.appService.getFeatures();  
@@ -336,5 +341,11 @@ export class SubmitPropertyComponent implements OnInit {
     features.removeAt(index);
   } 
 
-
+  createApartment(title: string) {
+    this.apartmentService.createApartment(title).subscribe((apartment:Apartment) => {
+      console.log(apartment);
+       // Now we navigate to /lists/task._id
+       this.router.navigate([ '/apartment', apartment._id ]); 
+    });
+  }
 }

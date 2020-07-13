@@ -8,7 +8,8 @@ const { mongoose } = require('./db/mongoose');
 const bodyParser = require('body-parser');
 
 // Load in the mongoose models
-const { User}  = require('./db/models/user.model');
+const { User }  = require('./db/models/user.model');
+const { Apartment }  = require('./db/models/apartment.model');
 
 const jwt = require('jsonwebtoken');
 
@@ -226,6 +227,71 @@ app.get('/users/me/access-token', verifySession, (req, res) => {
         res.status(400).send(e);
     });
 })
+
+
+/**
+ * GET /apartments
+ * Purpose: Get all apartments
+ */
+app.get('/apartments', authenticate, (req, res) => {
+    // We want to return an array of all the apartments that belong to the authenticated user 
+    Apartment.find({
+        _userId: req.user_id
+    }).then((apartments) => {
+        res.send(apartments);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
+/**
+ * POST /apartments
+ * Purpose: Create an apartments
+ */
+app.post('/apartments', authenticate, (req, res) => {
+    // We want to create a new apartment and return the new list document back to the user (which includes the id)
+    // The apartment information (fields) will be passed in via the JSON request body
+    let title = req.body.title;
+
+    let newApartment = new Apartment({
+        title,
+        _userId: req.user_id
+    });
+    newApartment.save().then((apartmentDoc) => {
+        // the full apartment document is returned (incl. id)
+        res.send(apartmentDoc);
+    })
+});
+
+/**
+ * PATCH /apartments/:id
+ * Purpose: Update a specified apartment
+ */
+app.patch('/apartments/:id', authenticate, (req, res) => {
+    // We want to update the specified apartment (list document with id in the URL) with the new values specified in the JSON body of the request
+    Apartment.findOneAndUpdate({ _id: req.params.id, _userId: req.user_id }, {
+        $set: req.body
+    }).then(() => {
+        res.send({ 'message': 'updated successfully'});
+    });
+});
+
+/**
+ * DELETE /apartments/:id
+ * Purpose: Delete a apartment
+ */
+app.delete('/apartments/:id', authenticate, (req, res) => {
+    // We want to delete the specified apartment (document with id in the URL)
+    List.findOneAndRemove({
+        _id: req.params.id,
+        _userId: req.user_id
+    }).then((removedApartmenttDoc) => {
+        res.send(removedApartmenttDoc);
+
+        // delete all the tasks that are in the deleted list
+        deleteTasksFromList(removedApartmenttDoc._id);
+    })
+});
 
 
 app.listen(3000, () => {
