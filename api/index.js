@@ -8,12 +8,14 @@ const io = require('socket.io')(server);
 
 const { mongoose } = require('./db/mongoose');
 
+const bodyParser = require('body-parser');
+const sgMail = require('@sendgrid/mail');
 // Load in the mongoose models
 const { User }  = require('./db/models/user.model');
 const { Property }  = require('./db/models/property.model');
 
 const jwt = require('jsonwebtoken');
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 
 
@@ -157,6 +159,21 @@ app.post('/users', (req, res) => {
         // else - the list object is undefined
         else{
             newUser.save().then(() => {
+
+                const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+const msg = {
+  to: newUser.email,
+  from: 'house.keybnb@gmail.com',
+  subject: 'New register',
+  text: 'any text here',
+  html: '<strong>Welcome!! Thank you for signing up we will keep you posted</strong>',
+};
+sgMail.send(msg)
+  .then(() => console.log('send mail success'))
+  .catch(console.log);
+               
+
                 return newUser.createSession();
             }).then((refreshToken) => {
                 // Session created successfully - refreshToken returned.
