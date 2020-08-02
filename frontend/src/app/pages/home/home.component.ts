@@ -8,6 +8,7 @@ import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { SocialUser } from "angularx-social-login";
+import { PropertyService } from 'src/app/property.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
   public settings: Settings;
   user: SocialUser;
   loggedIn: boolean;
-  constructor(public appSettings:AppSettings, public appService:AppService, public mediaObserver: MediaObserver) {
+  constructor(public appSettings:AppSettings, public appService:AppService, public mediaObserver: MediaObserver,private propertyService: PropertyService) {
     
     this.settings = this.appSettings.settings;
 
@@ -87,8 +88,13 @@ export class HomeComponent implements OnInit {
   }
 
   public getProperties(){  
-    //console.log('get properties by : ', this.searchFields);  
-    this.appService.getProperties().subscribe(data => {      
+    //console.log('get propropertyServiceperties by : ', this.searchFields);  
+    var _userId=this.propertyService.getUserId();
+    this.appService.getProperties(_userId).subscribe( data  => {
+      var propertysArr :Property[];
+      propertysArr= <Property[]> data;
+      this.properties=propertysArr
+      
       if(this.properties && this.properties.length > 0){  
         this.settings.loadMore.page++;
         this.pagination.page = this.settings.loadMore.page; 

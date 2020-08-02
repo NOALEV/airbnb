@@ -4,9 +4,10 @@ import { MatStepper } from '@angular/material/stepper';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AppService } from 'src/app/app.service';
 import { MapsAPILoader } from '@agm/core';
-import { ApartmentService } from 'src/app/apartment.service';
+import { PropertyService } from 'src/app/property.service';
 import { Router } from '@angular/router';
 import { Apartment } from 'src/app/models/apartment.model';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-submit-property',
@@ -19,6 +20,8 @@ export class SubmitPropertyComponent implements OnInit {
   public submitForm:FormGroup; 
   public features = [];
   public propertyTypes = [];
+  public bedTypes = [];
+  public cancellationPolicyes = [];
   public propertyStatuses = [];
   public cities = [];
   public neighborhoods = [];
@@ -31,25 +34,23 @@ export class SubmitPropertyComponent implements OnInit {
               private fb: FormBuilder, 
               private mapsAPILoader: MapsAPILoader, 
               private ngZone: NgZone,
-              private apartmentService: ApartmentService, private router: Router) { }
+              private propertyService: PropertyService, private router: Router) { }
               
 
   ngOnInit() {
     this.features = this.appService.getFeatures();  
     this.propertyTypes = this.appService.getPropertyTypes();
+    this.bedTypes = this.appService.getBedTypes();
+    this.cancellationPolicyes = this.appService.getcancellationPolicy();
     this.propertyStatuses = this.appService.getPropertyStatuses();
-    this.cities = this.appService.getCities();
-    this.neighborhoods = this.appService.getNeighborhoods();
-    this.streets = this.appService.getStreets();  
+      
 
     this.submitForm = this.fb.group({
       basic: this.fb.group({
         title: [null, Validators.required],
         desc: null,
-        priceDollar: null,
-        priceEuro: null,
+        cancellationPolicy: '',
         propertyType: [null, Validators.required],
-        propertyStatus: null, 
         gallery: null
       }),
       address: this.fb.group({
@@ -57,22 +58,18 @@ export class SubmitPropertyComponent implements OnInit {
         city: ['', Validators.required],
         zipCode: '',
         neighborhood: '',
-        street: ''
+        street: '',
+        lat: '',
+        lng:''
       }),
       additional: this.fb.group({
         bedrooms: '',
         bathrooms: '',
-        garages: '',
-        area: '',
-        yearBuilt: '',
+        bedType: '',
+        accommodates: '',
         features: this.buildFeatures()
       }),
-      media: this.fb.group({
-        videos: this.fb.array([ this.createVideo() ]),
-        plans: this.fb.array([ this.createPlan() ]), 
-        additionalFeatures: this.fb.array([ this.createFeature() ]),
-        featured: false
-      })
+ 
     }); 
 
     this.setCurrentPosition();
@@ -86,21 +83,12 @@ export class SubmitPropertyComponent implements OnInit {
       console.log(this.submitForm.value);      
     }
   }
+  
+
   public reset(){
     this.horizontalStepper.reset(); 
 
-    const videos = <FormArray>this.submitForm.controls.media.get('videos');
-    while (videos.length > 1) {
-      videos.removeAt(0)
-    }
-    const plans = <FormArray>this.submitForm.controls.media.get('plans');
-    while (plans.length > 1) {
-      plans.removeAt(0)
-    }
-    const additionalFeatures = <FormArray>this.submitForm.controls.media.get('additionalFeatures');
-    while (additionalFeatures.length > 1) {
-      additionalFeatures.removeAt(0)
-    }
+   
     
     this.submitForm.reset({
       additional: {
@@ -112,8 +100,6 @@ export class SubmitPropertyComponent implements OnInit {
     });   
      
   }
-
-  
 
   // -------------------- Address ---------------------------  
   public onSelectCity(){
@@ -133,16 +119,29 @@ export class SubmitPropertyComponent implements OnInit {
     }
   }
   private placesAutocomplete(){  
+   
     this.mapsAPILoader.load().then(() => { 
+      var cityBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(52.327157, 13.781318),
+        new google.maps.LatLng(52.684707, 13.066864)
+        );
       let autocomplete = new google.maps.places.Autocomplete(this.addressAutocomplete.nativeElement, {
-        types: ["address"]
+       
+        bounds: cityBounds,
+        types: ["address"],
+        strictBounds: false,
+        componentRestrictions: {
+          country: "DE",
+        }
       });  
       autocomplete.addListener("place_changed", () => { 
         this.ngZone.run(() => { 
+         
           let place: google.maps.places.PlaceResult = autocomplete.getPlace(); 
           if (place.geometry === undefined || place.geometry === null) {
             return;
           };
+
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng(); 
           this.getAddress();
@@ -151,21 +150,7 @@ export class SubmitPropertyComponent implements OnInit {
     });
   } 
   
-  // public getAddress(){    
-  //   this.mapsAPILoader.load().then(() => {
-  //     let geocoder = new google.maps.Geocoder();
-  //     let latlng = new google.maps.LatLng(this.lat, this.lng); 
-  //     geocoder.geocode({'location': latlng}, (results, status) => {
-  //       if(status === google.maps.GeocoderStatus.OK) {
-  //         console.log(results); 
-  //         //this.addresstext.nativeElement.focus();  
-  //         let address = results[0].formatted_address; 
-  //         this.submitForm.controls.location.setValue(address); 
-  //         this.setAddresses(results[0]);          
-  //       }
-  //     });
-  //   });
-  // }
+ 
   public getAddress(){    
     this.appService.getAddress(this.lat, this.lng).subscribe(response => {  
       console.log(response);
@@ -267,7 +252,8 @@ export class SubmitPropertyComponent implements OnInit {
         }
       })
     }
-
+    this.submitForm.controls.address.get('lat').setValue(this.lat); 
+    this.submitForm.controls.address.get('lng').setValue(this.lng); 
   }
 
 
@@ -287,42 +273,7 @@ export class SubmitPropertyComponent implements OnInit {
   
 
   
-  // -------------------- Media --------------------------- 
-  public createVideo(): FormGroup {
-    return this.fb.group({
-      id: null,
-      name: null, 
-      link: null 
-    });
-  }
-  public addVideo(): void {
-    const videos = this.submitForm.controls.media.get('videos') as FormArray;
-    videos.push(this.createVideo());
-  }
-  public deleteVideo(index) {
-    const videos = this.submitForm.controls.media.get('videos') as FormArray;
-    videos.removeAt(index);
-  }
-  
-  public createPlan(): FormGroup {
-    return this.fb.group({
-      id: null,
-      name: null, 
-      desc: null,
-      area: null,
-      rooms: null,
-      baths: null,
-      image: null
-    });
-  }
-  public addPlan(): void {
-    const plans = this.submitForm.controls.media.get('plans') as FormArray;
-    plans.push(this.createPlan());
-  }
-  public deletePlan(index) {
-    const plans = this.submitForm.controls.media.get('plans') as FormArray;
-    plans.removeAt(index);
-  } 
+ 
 
 
   public createFeature(): FormGroup {
@@ -340,12 +291,19 @@ export class SubmitPropertyComponent implements OnInit {
     const features = this.submitForm.controls.media.get('additionalFeatures') as FormArray;
     features.removeAt(index);
   } 
+  onProperryFormSubmit(values:Object):void
+  {
+   if (this.submitForm.valid) {
+      this.propertyService.createProperty(values).subscribe((res: HttpResponse<any>) => {
+      });
 
-  createApartment(title: string) {
-    this.apartmentService.createApartment(title).subscribe((apartment:Apartment) => {
-      console.log(apartment);
-       // Now we navigate to /lists/task._id
-       this.router.navigate([ '/apartment', apartment._id ]); 
-    });
-  }
+    }
+  
 }
+
+
+}
+    
+  
+   
+ 

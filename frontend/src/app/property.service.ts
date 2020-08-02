@@ -7,7 +7,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ApartmentService {
+export class PropertyService {
   http: any;
   webService: any;
 
@@ -18,19 +18,20 @@ export class ApartmentService {
     return this.webReqService.get('Apartments');
   }
 
-  createApartment(title: string) {
-    // We want to send a web request to create a list
-    return this.webReqService.post('apartments', { title });
+  createProperty(values: object) {
+    values["_userId"]=this.getUserId();
+    // We want to send a web request to create a propery
+    return this.webReqService.post('property', { values });
   }
 
-  updateApartment(id: string, title: string) {
+  updateProperty(id: string, values: object) {
     // We want to send a web request to update a list
-    return this.webReqService.patch(`apartments/${id}`, { title });
+    return this.webReqService.patch(`properties/${id}`, { values });
   }
 
 
   deleteApartment(id: string) {
-    return this.webReqService.delete(`apartments/${id}`);
+    return this.webReqService.delete(`properties/${id}`);
   }
 
   getNewAccessToken() {

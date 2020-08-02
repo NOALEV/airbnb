@@ -1,15 +1,16 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const { mongoose } = require('./db/mongoose');
 
-const bodyParser = require('body-parser');
-
 // Load in the mongoose models
 const { User }  = require('./db/models/user.model');
-const { Apartment }  = require('./db/models/apartment.model');
+const { Property }  = require('./db/models/property.model');
 
 const jwt = require('jsonwebtoken');
 
@@ -233,33 +234,92 @@ app.get('/users/me/access-token', verifySession, (req, res) => {
  * GET /apartments
  * Purpose: Get all apartments
  */
-app.get('/apartments', authenticate, (req, res) => {
+app.get('/properties/:id', (req, res) => {
     // We want to return an array of all the apartments that belong to the authenticated user 
-    Apartment.find({
-        _userId: req.user_id
-    }).then((apartments) => {
-        res.send(apartments);
+    Property.find({
+        _userId: req.params.id
+    }).then((properties)=> {
+     
+      res.send(properties);
     }).catch((e) => {
         res.send(e);
     });
 })
 
+//get property by Id
+app.get('/property/:_userId/:propertyId', (req, res) => {
+    // We want to return an array of all the apartments that belong to the authenticated user 
+    Property.findOne({
+        _userId: req.params._userId,
+        _id:req.params.propertyId,
+    }).then((properties)=> {
+     
+      res.send(properties);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
+
 /**
  * POST /apartments
  * Purpose: Create an apartments
  */
-app.post('/apartments', authenticate, (req, res) => {
+app.post('/property',  (req, res) => {
     // We want to create a new apartment and return the new list document back to the user (which includes the id)
     // The apartment information (fields) will be passed in via the JSON request body
-    let title = req.body.title;
+   
+    let body = req.body.values;
+    let newProperty= new Property();
+    newProperty.title=body.basic.title;
+    newProperty.desc=body.basic.desc;
+    newProperty.propertyType=body.basic.propertyType.name;
+    newProperty.cancellationPolicy=body.basic.cancellationPolicy.name;
+    newProperty.location=body.address.location;
+    newProperty.city=body.address.city.name;
+    newProperty.zipCode=body.address.zipCode;
+    newProperty.neighborhood=body.address.neighborhood;
+    newProperty.street=body.address.street.name;
+    newProperty.lat=body.address.lat;
+    newProperty.lng=body.address.lng;
+    newProperty.bedrooms=body.additional.bedrooms;
+    newProperty.bathrooms=body.additional.bathrooms;
+    newProperty.bedType=body.additional.bedType.name;
+    newProperty.accommodates=body.additional.accommodates;
+    newProperty.airConditioning=body.additional.features[0].selected;
+    newProperty.dryer=body.additional.features[1].selected;
+    newProperty.microwave=body.additional.features[2].selected;
+    newProperty.refrigerator=body.additional.features[3].selected;
+    newProperty.tv=body.additional.features[4].selected;
+    newProperty.wifi=body.additional.features[5].selected;
+    newProperty.SuitableForFamilies=body.additional.features[6].selected;
+    newProperty.Kitchen=body.additional.features[7].selected;
+    newProperty.Heating=body.additional.features[8].selected;
+    newProperty.Iron=body.additional.features[9].selected;
+    newProperty.Elevators=body.additional.features[10].selected;
+    newProperty.Parking=body.additional.features[11].selected;
+    newProperty.Linen=body.additional.features[12].selected;
+    newProperty.Terrace=body.additional.features[13].selected;
+    newProperty.kitchenUtensils=body.additional.features[14].selected;
+    newProperty.ComfortableWorkplaceForLaptop=body.additional.features[15].selected;
+    newProperty.HotWater=body.additional.features[16].selected;
+    newProperty.Hangers=body.additional.features[17].selected;
+    newProperty.StoveTop=body.additional.features[18].selected;
+    newProperty.Shampoo=body.additional.features[19].selected;
 
-    let newApartment = new Apartment({
-        title,
-        _userId: req.user_id
-    });
-    newApartment.save().then((apartmentDoc) => {
-        // the full apartment document is returned (incl. id)
-        res.send(apartmentDoc);
+    newProperty._userId=body._userId;
+    if(body.basic.gallery){
+    for(i=0;i<body.basic.gallery.length;i++)
+    {
+        const baseImage =body.basic.gallery[i].preview;
+        
+        newProperty.images.push({
+           'data':baseImage
+        })
+    }
+}
+    newProperty.save().then((propertyDoc) => {
+       res.send(propertyDoc);
     })
 });
 
@@ -267,12 +327,57 @@ app.post('/apartments', authenticate, (req, res) => {
  * PATCH /apartments/:id
  * Purpose: Update a specified apartment
  */
-app.patch('/apartments/:id', authenticate, (req, res) => {
+app.patch('/properties/:id', (req, res) => {
     // We want to update the specified apartment (list document with id in the URL) with the new values specified in the JSON body of the request
-    Apartment.findOneAndUpdate({ _id: req.params.id, _userId: req.user_id }, {
-        $set: req.body
-    }).then(() => {
-        res.send({ 'message': 'updated successfully'});
+    let body = req.body.values;
+    Property.findOne({ _id: req.params.id } 
+    ).then((property) => {
+        property.title=body.basic.title;
+        property.desc=body.basic.desc;
+        property.propertyType=body.basic.propertyType.name;
+        property.cancellationPolicy=body.basic.cancellationPolicy?body.basic.cancellationPolicy.name:"";
+        property.location=body.address.location;
+        property.city=body.address.city.name;
+        property.street=body.address.street.name;
+        property.lat=body.address.lat;
+        property.lng=body.address.lng;
+        property.bedrooms=body.additional.bedrooms;
+        property.bathrooms=body.additional.bathrooms;
+        property.bedType=body.additional.bedType.name;
+        property.accommodates=body.additional.accommodates;
+        property.airConditioning=body.additional.features[0].selected;
+        property.dryer=body.additional.features[1].selected;
+        property.microwave=body.additional.features[2].selected;
+        property.refrigerator=body.additional.features[3].selected;
+        property.tv=body.additional.features[4].selected;
+        property.wifi=body.additional.features[5].selected;
+        property.SuitableForFamilies=body.additional.features[6].selected;
+        property.Kitchen=body.additional.features[7].selected;
+        property.Heating=body.additional.features[8].selected;
+        property.Iron=body.additional.features[9].selected;
+        property.Elevators=body.additional.features[10].selected;
+        property.Parking=body.additional.features[11].selected;
+        property.Linen=body.additional.features[12].selected;
+        property.Terrace=body.additional.features[13].selected;
+        property.kitchenUtensils=body.additional.features[14].selected;
+        property.ComfortableWorkplaceForLaptop=body.additional.features[15].selected;
+        property.HotWater=body.additional.features[16].selected;
+        property.Hangers=body.additional.features[17].selected;
+        property.StoveTop=body.additional.features[18].selected;
+        property.Shampoo=body.additional.features[19].selected;
+        if(body.basic.gallery){
+            for(i=0;i<body.basic.gallery.length;i++)
+            {
+                const baseImage =body.basic.gallery[i].preview;
+                
+                property.images.push({
+                   'data':baseImage
+                })
+            }
+        }
+        property.save().then((propertyDoc) => {
+            res.send(propertyDoc);
+         })
     });
 });
 
@@ -280,16 +385,12 @@ app.patch('/apartments/:id', authenticate, (req, res) => {
  * DELETE /apartments/:id
  * Purpose: Delete a apartment
  */
-app.delete('/apartments/:id', authenticate, (req, res) => {
+app.delete('/properties/:id', (req, res) => {
     // We want to delete the specified apartment (document with id in the URL)
-    List.findOneAndRemove({
-        _id: req.params.id,
-        _userId: req.user_id
+    Property.findOneAndRemove({
+        _userId: req.params.id
     }).then((removedApartmenttDoc) => {
         res.send(removedApartmenttDoc);
-
-        // delete all the tasks that are in the deleted list
-        deleteTasksFromList(removedApartmenttDoc._id);
     })
 });
 
