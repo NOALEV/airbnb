@@ -61,7 +61,7 @@ import { LockScreenComponent } from './pages/lock-screen/lock-screen.component';
     FormsModule, 
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s',
+      apiKey: 'AIzaSyDdUz2SYr4sgK4TtaHi_JLczQvWLOHKp_E',
       libraries: ["places"]
     }),
     EmbedVideo.forRoot(),

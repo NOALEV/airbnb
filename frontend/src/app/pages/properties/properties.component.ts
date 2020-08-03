@@ -65,6 +65,7 @@ export class PropertiesComponent implements OnInit {
   }
 
   public getProperties(){   
+    /*
     this.appService.getProperties().subscribe(data => { 
       let result = this.filterData(data); 
       if(result.data.length == 0){
@@ -77,6 +78,7 @@ export class PropertiesComponent implements OnInit {
       this.pagination = result.pagination;
       this.message = null;
     })
+    */
   }
 
   public resetPagination(){ 

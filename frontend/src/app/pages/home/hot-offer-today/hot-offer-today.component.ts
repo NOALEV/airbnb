@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppService } from 'src/app/app.service';
+import { PropertyService } from 'src/app/property.service';
 
 @Component({
   selector: 'app-hot-offer-today',
@@ -9,10 +10,14 @@ import { AppService } from 'src/app/app.service';
 export class HotOfferTodayComponent implements OnInit {
   @Input('propertyId') propertyId;
   public property;
-  constructor(public appService:AppService) { }
+  constructor(public appService:AppService,
+    private propertyService: PropertyService,
+    ) { }
 
   ngOnInit() {
-    this.appService.getPropertyById(this.propertyId).subscribe(property=>{
+    var _userId=this.propertyService.getUserId();
+
+    this.appService.getPropertyById(_userId,this.propertyId).subscribe(property=>{
       this.property = property;
     }) 
   }

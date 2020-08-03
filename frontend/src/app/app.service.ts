@@ -5,6 +5,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Property, Location } from './app.models';
 import { AppSettings } from './app.settings';
+import { WebRequestService } from './web-request.service';
 
 export class Data {
   constructor(public properties: Property[],
@@ -24,19 +25,20 @@ export class AppService {
     []  // locations
   )
   public url = "assets/data/";
-  public apiKey = 'AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s';
+  public apiKey ="AIzaSyDdUz2SYr4sgK4TtaHi_JLczQvWLOHKp_E";
   
-  constructor(public http:HttpClient, 
+  constructor(private webReqService: WebRequestService,
+    public http: HttpClient,
               private bottomSheet: MatBottomSheet, 
               private snackBar: MatSnackBar,
               public appSettings:AppSettings) { }
     
-  public getProperties(): Observable<Property[]>{
-    return this.http.get<Property[]>(this.url + 'properties.json');
+  public getProperties(userId: string){
+    return this.webReqService.get(`properties/${userId}`);
   }
 
-  public getPropertyById(id): Observable<Property>{
-    return this.http.get<Property>(this.url + 'property-' + id + '.json');
+  public getPropertyById(_userId,propertyId){
+    return this.webReqService.get(`property/${_userId}/${propertyId}`);
   }
 
   public getFeaturedProperties(): Observable<Property[]>{
@@ -92,12 +94,39 @@ export class AppService {
       });  
     }    
   }
+  public getBedTypes(){
+    return [ 
+      { id: 1, name: 'Real Bed' },
+      { id: 2, name: 'Pull-out Sofa' },
+      { id: 3, name: 'Couch' },
+      { id: 4, name: 'Futon' },
+     
+    ]
+  }
+  public getcancellationPolicy(){
+    return [ 
+      { id: 1, name: 'flexible' },
+      { id: 2, name: 'moderate' },
+      { id: 3, name: '14 Days' },
+      { id: 4, name: '30 Days' },
+      { id: 5, name: '60 Days' },
 
+    ]
+  }
   public getPropertyTypes(){
     return [ 
-      { id: 1, name: 'Office' },
-      { id: 2, name: 'House' },
-      { id: 3, name: 'Apartment' }
+      { id: 1, name: 'Loft' },
+      { id: 2, name: 'Guesthouse' },
+      { id: 3, name: 'Apartment' },
+      { id: 4, name: 'Condominium' },
+      { id: 5, name: 'House' },
+      { id: 6, name: 'Serviced apartment' },
+      { id: 7, name: 'Townhouse' },
+      { id: 8, name: 'Boutique hotel' },
+      { id: 9, name: 'Bed and breakfast' },
+      { id: 10, name: 'Cabin' },
+      { id: 11, name: 'Bungalow' },
+
     ]
   }
 
@@ -170,16 +199,31 @@ export class AppService {
   public getFeatures(){
     return [ 
       { id: 1, name: 'Air Conditioning', selected: false },
-      { id: 2, name: 'Barbeque', selected: false },
-      { id: 3, name: 'Dryer', selected: false },
-      { id: 4, name: 'Microwave', selected: false }, 
-      { id: 5, name: 'Refrigerator', selected: false },
-      { id: 6, name: 'TV Cable', selected: false },
-      { id: 7, name: 'Sauna', selected: false },
-      { id: 8, name: 'WiFi', selected: false },
-      { id: 9, name: 'Fireplace', selected: false },
-      { id: 10, name: 'Swimming Pool', selected: false },
-      { id: 11, name: 'Gym', selected: false },
+      { id: 2, name: 'Dryer', selected: false },
+      { id: 3, name: 'Microwave', selected: false }, 
+      { id:4, name: 'Refrigerator', selected: false },
+      { id: 5, name: 'TV Cable', selected: false },
+      { id:6, name: 'WiFi', selected: false },
+      { id: 7, name: 'Suitable for families', selected: false },
+      { id: 8, name: 'Kitchen', selected: false },
+      { id: 9, name: 'Heating', selected: false },
+      { id: 10, name: 'Iron', selected: false },
+      { id: 11, name: 'Elevators', selected: false },
+      { id: 12, name: 'Parking', selected: false },
+      { id: 13, name: 'Linen', selected: false },
+      { id: 14, name: 'Terrace', selected: false },
+      { id: 15, name: 'kitchen utensils', selected: false },
+      { id: 16, name: 'Comfortable workplace for laptop', selected: false },
+      { id: 17, name: ' Hot water', selected: false },
+      { id: 18, name: ' Hangers', selected: false },
+      { id: 19, name: ' Stove top', selected: false },
+      { id: 20, name: ' Shampoo', selected: false },
+      
+
+
+
+
+
     ]
   }
 

@@ -9,6 +9,7 @@ import { AppSettings, Settings } from 'src/app/app.settings';
 import { CompareOverviewComponent } from 'src/app/shared/compare-overview/compare-overview.component';
 import { EmbedVideoService } from 'ngx-embed-video'; 
 import { emailValidator } from 'src/app/theme/utils/app-validators';
+import { PropertyService } from 'src/app/property.service';
 
 @Component({
   selector: 'app-property',
@@ -38,6 +39,8 @@ export class PropertyComponent implements OnInit {
               public appService:AppService, 
               private activatedRoute: ActivatedRoute, 
               private embedService: EmbedVideoService,
+              private propertyService: PropertyService,
+
               public fb: FormBuilder) {
     this.settings = this.appSettings.settings; 
   }
@@ -78,10 +81,11 @@ export class PropertyComponent implements OnInit {
     (window.innerWidth < 960) ? this.sidenavOpen = false : this.sidenavOpen = true; 
   }
 
-  public getPropertyById(id){
-    this.appService.getPropertyById(id).subscribe(data=>{
-      this.property = data;  
-      this.embedVideo = this.embedService.embed(this.property.videos[1].link);
+  public getPropertyById(propertyId){
+    var _userId=this.propertyService.getUserId();
+
+    this.appService.getPropertyById(_userId,propertyId).subscribe(data=>{
+     // this.property = data;  
       setTimeout(() => { 
         this.config.observer = true;
         this.config2.observer = true; 
