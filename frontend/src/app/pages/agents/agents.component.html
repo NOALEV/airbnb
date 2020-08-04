@@ -1,8 +1,8 @@
 <app-header-image [backgroundImage]="'assets/images/others/contact.jpg'" 
                   [bgImageAnimate]="false" 
                   [contentOffsetToTop]="false"                
-                  [title]="'Our Agents'"
-                  [desc]="'Hire a real estate agent, who will invest in your  success'">
+                  [title]="'Our Members'"
+                  [desc]="">
 </app-header-image>
 
 <div class="px-3">
@@ -52,8 +52,8 @@
                       </a>  
                   </div>
                   <div>
-                      <a [routerLink]="['/agents', agent.id]" mat-button color="primary" class="uppercase">View Profile</a>
-                  </div> 
+                    <a [routerLink]="['/agents', agent.id]" mat-button color="primary" class="uppercase">View Profile</a>
+                </div> 
               </mat-card-actions>                              
           </mat-card>
       </div>
