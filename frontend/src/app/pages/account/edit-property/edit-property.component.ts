@@ -7,6 +7,8 @@ import { Property } from 'src/app/app.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PropertyService } from 'src/app/property.service';
 import { HttpResponse } from '@angular/common/http';
+import { Router, NavigationEnd } from '@angular/router'; 
+
 
 @Component({
   selector: 'app-edit-property',
@@ -39,6 +41,7 @@ export class EditPropertyComponent implements OnInit {
               private mapsAPILoader: MapsAPILoader, 
               private ngZone: NgZone,
               private propertyService: PropertyService,
+              public router:Router,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -341,6 +344,7 @@ console.log();
   {
    if (this.submitForm.valid) {
       this.propertyService.updateProperty(this.currentPropertyId,values).subscribe((res: HttpResponse<any>) => {
+        this.router.navigate(['/myproperties']);
 
       });
 

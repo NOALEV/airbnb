@@ -8,7 +8,6 @@ const io = require('socket.io')(server);
 
 const { mongoose } = require('./db/mongoose');
 
-const bodyParser = require('body-parser');
 const sgMail = require('@sendgrid/mail');
 // Load in the mongoose models
 const { User }  = require('./db/models/user.model');
