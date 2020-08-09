@@ -7,6 +7,10 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 const { mongoose } = require('./db/mongoose');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5289d320e2d03fad877a50ce27ff6af703fb1b3b
 const sgMail = require('@sendgrid/mail');
 // Load in the mongoose models
 const { User }  = require('./db/models/user.model');

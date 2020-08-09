@@ -558,93 +558,93 @@ export class AppService {
     return [        
         { 
             id: 1,
-            fullName: 'Lusia Manuel',
-            desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
+            fullName: 'Noa Lev',
+            desc: 'Member of company: HouseKey.',            
             organization: 'HouseKey',
-            email: 'lusia.m@housekey.com',
-            phone: '(224) 267-1346',
+            email: 'noa.lev@HouseKey.com',
+            phone: '054-3488462',
             social: {
-              facebook: 'lusia',
-              twitter: 'lusia',
-              linkedin: 'lusia',
-              instagram: 'lusia',
-              website: 'https://lusia.manuel.com'
+              //facebook: 'lusia',
+              //twitter: 'lusia',
+              //linkedin: 'lusia',
+              //instagram: 'lusia',
+              //website: 'https://lusia.manuel.com'
             },
-            ratingsCount: 6,
-            ratingsValue: 480,
-            image: 'assets/images/agents/a-1.jpg' 
+            //ratingsCount: 6,
+            //ratingsValue: 480,
+            image: 'assets/images/agents/noa.jpg' 
         },
         { 
             id: 2,
-            fullName: 'Andy Warhol',
-            desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
+            fullName: 'Aviya Malka',
+            desc: 'Member of company: HouseKey.',            
             organization: 'HouseKey',
-            email: 'andy.w@housekey.com',
-            phone: '(212) 457-2308',
+            email: 'aviya.malka@housekey.com',
+            phone: '058-7474641',
             social: {
-              facebook: '',
-              twitter: '',
-              linkedin: '',
-              instagram: '',
-              website: 'https://andy.warhol.com'
+              //facebook: '',
+              //twitter: '',
+              //linkedin: '',
+              //instagram: '',
+              //website: 'https://andy.warhol.com'
             },
-            ratingsCount: 4,
-            ratingsValue: 400,
-            image: 'assets/images/agents/a-2.jpg' 
+            //ratingsCount: 4,
+            //ratingsValue: 400,
+            image: 'assets/images/agents/aviya.jpg' 
         },        
         { 
             id: 3,
-            fullName: 'Tereza Stiles',
-            desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
+            fullName: 'Chani Diamant',
+            desc: 'Member of company: HouseKey.',            
             organization: 'HouseKey',
-            email: 'tereza.s@housekey.com',
-            phone: '(214) 617-2614',
+            email: 'chani.diamant@housekey.com',
+            phone: '052-6971305',
             social: {
-              facebook: '',
-              twitter: '',
-              linkedin: '',
-              instagram: '',
+              //facebook: '',
+              //twitter: '',
+              //linkedin: '',
+              //instagram: '',
               website: 'https://tereza.stiles.com'
             },
-            ratingsCount: 4,
-            ratingsValue: 380,
-            image: 'assets/images/agents/a-3.jpg' 
+            //ratingsCount: 4,
+            //ratingsValue: 380,
+            image: 'assets/images/agents/chani.jpg' 
         },
         { 
           id: 4,
-          fullName: 'Michael Blair',
-          desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
+          fullName: 'Tehila Rashkes',
+          desc: 'Member of company: HouseKey.',            
           organization: 'HouseKey',
-          email: 'michael.b@housekey.com',
-          phone: '(267) 388-1637',
+          email: 'tehila.rashkes@housekey.com',
+          phone: '054-5856054',
           social: {
-            facebook: '',
-            twitter: '',
-            linkedin: '',
-            instagram: '',
+            //facebook: '',
+            //twitter: '',
+            //linkedin: '',
+            //instagram: '',
             website: 'https://michael.blair.com'
           },
-          ratingsCount: 6,
-          ratingsValue: 480,
-          image: 'assets/images/agents/a-4.jpg'  
+          //ratingsCount: 6,
+          //ratingsValue: 480,
+          image: 'assets/images/agents/tehila.jpg'  
         },
         { 
             id: 5,
-            fullName: 'Michelle Ormond',
-            desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
+            fullName: 'Hadar Bruchim',
+            desc: 'Member of company: HouseKey.',            
             organization: 'HouseKey',
-            email: 'michelle.o@housekey.com',
-            phone: '(267) 388-1637',
+            email: 'hadar.bruchim@housekey.com',
+            phone: '053-3367444',
             social: {
-              facebook: '',
-              twitter: '',
-              linkedin: '',
-              instagram: '',
+              //facebook: '',
+              //twitter: '',
+              //linkedin: '',
+              //instagram: '',
               website: 'https://michelle.ormond.com'
             },
-            ratingsCount: 6,
-            ratingsValue: 480, 
-            image: 'assets/images/agents/a-5.jpg' 
+            //ratingsCount: 6,
+            //ratingsValue: 480, 
+            image: 'assets/images/agents/hadar.jpg' 
         }
     ];
   }

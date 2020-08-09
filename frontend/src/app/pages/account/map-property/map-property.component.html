@@ -1,0 +1,11 @@
+<div  class="p-3">
+  <h1 class="fw-500 text-center">{{title}}</h1>
+</div>
+<div>
+<div fxFlex="100" class="px-2 mb-4">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]="true" [fullscreenControl]="true" (mapClick)="onMapClick($event)">
+        <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true" (markerClick)="onMarkerClick($event)"></agm-marker>
+    </agm-map>
+</div>
+</div>
+
