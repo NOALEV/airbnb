@@ -13,7 +13,7 @@ const sgMail = require('@sendgrid/mail');
 // Load in the mongoose models
 const { User }  = require('./db/models/user.model');
 const { Property }  = require('./db/models/property.model');
-
+const { Comment }  = require('./db/models/comment.model');
 const jwt = require('jsonwebtoken');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -459,6 +459,69 @@ function convertCurrency(amount, fromCurrency, toCurrency, cb) {
     });
   }
   
+/**
+ * GET /comment
+ * Purpose: Get all comment
+ */
+app.get('/comments', (req, res) => {
+    // We want to return an array of all the lists that belong to the authenticated user 
+    Comment.find({
+        _userId: req.user_id
+    }).then((lists) => {
+        res.send(comment);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
+/**
+ * POST /comment
+ * Purpose: Create a comment
+ */
+app.post('/comments', (req, res) => {
+    // We want to create a new comment and return the new comment document back to the user (which includes the id)
+    // The comment information (fields) will be passed in via the JSON request body
+    let title = req.body.title;
+    let message = req.body.message;
+    let newComment = new Comment({
+        title,
+        message,
+        _userId: req.user_id
+    });
+    newComment.save().then((commentDoc) => {
+        // the full list document is returned (incl. id)
+        res.send(commentDoc);
+    })
+});
+
+/**
+ * PATCH /comments/:id
+ * Purpose: Update a specified list
+ */
+app.patch('/comments/:id', (req, res) => {
+    // We want to update the specified list (list document with id in the URL) with the new values specified in the JSON body of the request
+    Comment.findOneAndUpdate({ _id: req.params.id, _userId: req.user_id }, {
+        $set: req.body
+    }).then(() => {
+        res.send({ 'message': 'updated successfully'});
+    });
+});
+
+/**
+ * DELETE /comments/:id
+ * Purpose: Delete a comment
+ */
+app.delete('/comments/:id', (req, res) => {
+    // We want to delete the specified list (document with id in the URL)
+    Comment.findOneAndRemove({
+        _id: req.params.id,
+        _userId: req.user_id
+    }).then((removedCommentDoc) => {
+        res.send(removedCommentDoc);
+
+        
+    })
+});
 
 app.listen(3000, () => {
     console.log(" Server is listening on port 3000");

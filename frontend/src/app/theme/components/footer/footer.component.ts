@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { emailValidator } from '../../utils/app-validators';
-
+import { HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CommentService } from 'src/app/comment.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -270,7 +272,9 @@ export class FooterComponent implements OnInit {
   ];
   public feedbackForm: FormGroup;
   public subscribeForm: FormGroup;
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(
+      public formBuilder: FormBuilder,
+      private commentService: CommentService, private router: Router) { }
 
   ngOnInit() {
     this.feedbackForm = this.formBuilder.group({ 
@@ -283,14 +287,16 @@ export class FooterComponent implements OnInit {
   }
 
   public onFeedbackFormSubmit(values:Object):void {
+    console.log(values);
     if (this.feedbackForm.valid) {
-      console.log(values);
+        this.commentService.createComment(values).subscribe((res: HttpResponse<any>) => {
+        });
     }
   }
 
   public onSubscribeFormSubmit(values:Object):void {
     if (this.subscribeForm.valid) {
-      console.log(values);
+        console.log(values);
     }
   }
 
