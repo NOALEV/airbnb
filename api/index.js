@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const https = require('https');
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 const server = require('http').createServer(app);
@@ -409,7 +410,55 @@ app.delete('/properties/:id', (req, res) => {
         res.send(removedApartmenttDoc);
     })
 });
+app.get('/convertCurrency/:amount/:fromCurrency/:toCurrency', (req, res) => {
+    convertCurrency(req.params.amount,req.params.fromCurrency,req.params.toCurrency, function(err, amount) {
+       
+       var body ={'amount':amount}
+       res.status(200).send(body);
+    });
+})
 
+function convertCurrency(amount, fromCurrency, toCurrency, cb) {
+    var apiKey = 'efd453c3abd67b224d00';
+  
+    fromCurrency = encodeURIComponent(fromCurrency);
+    toCurrency = encodeURIComponent(toCurrency);
+    var query = fromCurrency + '_' + toCurrency;
+  
+    var url = 'https://free.currconv.com/api/v7/convert?q='
+              + query + '&compact=ultra&apiKey=' + apiKey;
+  console.log(url);
+    https.get(url, function(res){
+        var body = '';
+  
+        res.on('data', function(chunk){
+            body += chunk;
+        });
+  
+        res.on('end', function(){
+            try {
+              var jsonObj = JSON.parse(body);
+  
+              var val = jsonObj[query];
+              if (val) {
+                var total = val * amount;
+                cb(null, Math.round(total * 100) / 100);
+              } else {
+                var err = new Error("Value not found for " + query);
+                console.log(err);
+                cb(err);
+              }
+            } catch(e) {
+              console.log("Parse error: ", e);
+              cb(e);
+            }
+        });
+    }).on('error', function(e){
+          console.log("Got an error: ", e);
+          cb(e);
+    });
+  }
+  
 
 app.listen(3000, () => {
     console.log(" Server is listening on port 3000");
