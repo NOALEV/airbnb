@@ -58,7 +58,9 @@ export class PropertyService {
   getUserId() {
     return localStorage.getItem('user-id');
   }
- 
+  convertCurrency(amount:number,fromCurrency:string,toCurrency:string) {
+    return this.webReqService.get(`convertCurrency/${amount}/${fromCurrency}/${toCurrency}`);
+  }
 
   setAccessToken(accessToken: string) {
     localStorage.setItem('x-access-token', accessToken)
