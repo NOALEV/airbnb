@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SwiperConfigInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper';
 import { AppService } from 'src/app/app.service';
+import { CommentService } from 'src/app/comment.service';
+import { Feedback } from 'src/app/app.models';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-testimonials',
@@ -8,6 +11,7 @@ import { AppService } from 'src/app/app.service';
   styleUrls: ['./testimonials.component.scss']
 })
 export class TestimonialsComponent implements OnInit { 
+  comments: Feedback[];
   public testimonials;
   public config: SwiperConfigInterface = { };
   private pagination: SwiperPaginationInterface = {
@@ -15,10 +19,21 @@ export class TestimonialsComponent implements OnInit {
     clickable: true
   };
 
-  constructor(public appService:AppService) { }
+  constructor(public appService:AppService,public commentService:CommentService) { }
 
   ngOnInit() {
-    this.testimonials = this.appService.getTestimonials(); 
+   this.commentService.getComments().subscribe((comments: Feedback[] )=>{
+    this.comments = comments;
+console.log(comments);
+    });    
+
+  }
+  getUser() {
+    
+    let user:User;
+    user= JSON.parse( localStorage.getItem('user')) ;
+    return user;
+
   }
 
   ngAfterViewInit(){

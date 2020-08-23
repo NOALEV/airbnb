@@ -44,16 +44,19 @@
                     <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="45" ngClass.xs="pt-5"> 
                         <h2 class="uppercase">Feedback</h2>
                         <p class="desc">We want your feedback about everything</p>
-                        <form [formGroup]="feedbackForm"  class="custom-form pt-2">                            
+                        <form [formGroup]="feedbackForm"  class="custom-form pt-2">     
+                            <mat-label>E-mail</mat-label>                       
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>E-mail</mat-label> 
-                                <input matInput autocomplete="off" formControlName="email">
+                                
+                                <textarea matInput placeholder="email" formControlName="email"></textarea> 
                                 <mat-error *ngIf="feedbackForm.controls.email.errors?.required">Email is required</mat-error>
                                 <mat-error *ngIf="feedbackForm.controls.email.hasError('invalidEmail')">Invalid email address</mat-error>
                             </mat-form-field>
+                
+                            <mat-label>Message for us</mat-label>                       
+
                             <mat-form-field appearance="outline" class="w-100">
-                                <mat-label>Message for us</mat-label> 
-                                <textarea matInput formControlName="message" rows="6"></textarea> 
+                                <textarea matInput placeholder="Message for us" formControlName="message"  rows="6"></textarea> 
                                 <mat-error *ngIf="feedbackForm.controls.message.errors?.required">Message is required</mat-error>
                             </mat-form-field>
                             <div class="w-100 text-center">

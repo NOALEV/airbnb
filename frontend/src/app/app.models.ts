@@ -61,4 +61,9 @@ export class Pagination {
                 public total: number,
                 public totalPages: number){ }
 }
+export class Feedback {
+    constructor(public email: string,
+                public message: string,
+               ){ }
+}
 

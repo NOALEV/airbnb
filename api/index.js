@@ -7,6 +7,8 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 5
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
+
+
 const { mongoose } = require('./db/mongoose');
 
 const sgMail = require('@sendgrid/mail');
@@ -286,7 +288,7 @@ app.post('/property',  (req, res) => {
     // We want to create a new apartment and return the new list document back to the user (which includes the id)
     // The apartment information (fields) will be passed in via the JSON request body
    
-    let body = req.body.values;
+
     let newProperty= new Property();
     newProperty.title=body.basic.title;
     newProperty.desc=body.basic.desc;
@@ -465,14 +467,13 @@ function convertCurrency(amount, fromCurrency, toCurrency, cb) {
  */
 app.get('/comments', (req, res) => {
     // We want to return an array of all the lists that belong to the authenticated user 
+    let body = req.body.values;
     Comment.find({
-        _userId: req.user_id
-    }).then((lists) => {
-        res.send(comment);
-    }).catch((e) => {
-        res.send(e);
+    }).then((comments) => {
+        console.log(comments)
+        res.send(comments);
+    })
     });
-})
 
 /**
  * POST /comment
@@ -481,24 +482,24 @@ app.get('/comments', (req, res) => {
 app.post('/comments', (req, res) => {
     // We want to create a new comment and return the new comment document back to the user (which includes the id)
     // The comment information (fields) will be passed in via the JSON request body
-    let title = req.body.title;
-    let message = req.body.message;
-    let newComment = new Comment({
-        title,
-        message,
-        _userId: req.user_id
-    });
+    let body = req.body.values;
+    
+    let newComment = new Comment();
+    newComment.email = body.email;
+    newComment.message = body.message;
+    newComment._userId=body._userId;
+
     newComment.save().then((commentDoc) => {
         // the full list document is returned (incl. id)
         res.send(commentDoc);
-    })
+    });
 });
-
+  
 /**
  * PATCH /comments/:id
  * Purpose: Update a specified list
  */
-app.patch('/comments/:id', (req, res) => {
+/*app.patch('/comments/:id', (req, res) => {
     // We want to update the specified list (list document with id in the URL) with the new values specified in the JSON body of the request
     Comment.findOneAndUpdate({ _id: req.params.id, _userId: req.user_id }, {
         $set: req.body
@@ -506,12 +507,12 @@ app.patch('/comments/:id', (req, res) => {
         res.send({ 'message': 'updated successfully'});
     });
 });
-
+*/
 /**
  * DELETE /comments/:id
  * Purpose: Delete a comment
  */
-app.delete('/comments/:id', (req, res) => {
+/*app.delete('/comments/:id', (req, res) => {
     // We want to delete the specified list (document with id in the URL)
     Comment.findOneAndRemove({
         _id: req.params.id,
@@ -522,7 +523,7 @@ app.delete('/comments/:id', (req, res) => {
         
     })
 });
-
+*/
 app.listen(3000, () => {
     console.log(" Server is listening on port 3000");
 })

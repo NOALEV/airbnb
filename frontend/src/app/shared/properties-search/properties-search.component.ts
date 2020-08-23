@@ -108,6 +108,7 @@ export class PropertiesSearchComponent implements OnInit {
         from: null,
         to: null 
       },
+    
       city: null,
       zipCode: null,
       neighborhood: null,

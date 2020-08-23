@@ -18,9 +18,10 @@ export class CommentService {
   }
 
   createComment(values: object) {
-    values["_userId"]=this.getUserId();
+    
+    values["_userId"]=this.getUserId;
     // We want to send a web request to create a propery
-    return this.webReqService.post('commment', { values });
+    return this.webReqService.post('comments', { values });
   }
 
   updateComment(id: string, values: object) {

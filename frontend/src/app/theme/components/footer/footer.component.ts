@@ -4,6 +4,7 @@ import { emailValidator } from '../../utils/app-validators';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommentService } from 'src/app/comment.service';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -287,13 +288,23 @@ export class FooterComponent implements OnInit {
   }
 
   public onFeedbackFormSubmit(values:Object):void {
+      
     console.log(values);
     if (this.feedbackForm.valid) {
         this.commentService.createComment(values).subscribe((res: HttpResponse<any>) => {
+            
         });
+       
     }
+    this.reset();
   }
-
+  public reset(){     
+    this.feedbackForm.reset({ 
+      email: null,
+      message: null, 
+    
+    })
+  }
   public onSubscribeFormSubmit(values:Object):void {
     if (this.subscribeForm.valid) {
         console.log(values);
