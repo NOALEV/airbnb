@@ -1,0 +1,14 @@
+<div>
+
+    <canvas baseChart
+            [datasets]="datasets"
+            [labels]="labels"
+            [legend]="isShowLegend"
+            [chartType]="chartType"
+            [colors]="chartColors"
+            [options]="options"
+            (chartHover)="onChartHovered($event)"
+            (chartClick)="onChartClicked($event)"></canvas>
+
+</div>
+

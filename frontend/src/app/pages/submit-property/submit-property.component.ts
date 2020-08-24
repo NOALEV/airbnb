@@ -8,6 +8,9 @@ import { PropertyService } from 'src/app/property.service';
 import { Router } from '@angular/router';
 import { Apartment } from 'src/app/models/apartment.model';
 import { HttpResponse } from '@angular/common/http';
+import { HChartsSettings, ChartType } from 'src/app/shared/chart/chart.component.interface';
+import { Property } from '../../app.models';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-submit-property',
@@ -29,6 +32,9 @@ export class SubmitPropertyComponent implements OnInit {
   public lat: number = 40.678178;
   public lng: number = -73.944158;
   public zoom: number = 12;  
+  public chartsSettings: HChartsSettings;
+  public airbnbProperties: Property[];
+  public chartRadios: [ChartType.Lines, ChartType.Pie, ChartType.Doughnut, ChartType.Bars];
 
   constructor(public appService:AppService, 
               private fb: FormBuilder, 
@@ -294,16 +300,82 @@ export class SubmitPropertyComponent implements OnInit {
   onProperryFormSubmit(values:Object):void
   {
    if (this.submitForm.valid) {
+    this.setAirbnbProperties(values);
       this.propertyService.createProperty(values).subscribe((res: HttpResponse<any>) => {
       });
 
     }
   
 }
+// Airbnbn properties
+private getPriceAsNumber(price: string) {
+  price = price.replace("$", "");
+  return Number(price)
+}
 
+setChartData(datasets: Chart.ChartDataSets[]) {
+  this.chartsSettings = {
+      chartType: ChartType.Lines,
+      isShowLegend: true,
+      labels: ['daily price', 'weekly price', 'monthly price'],
+      datasets: datasets
+  } as HChartsSettings;
+}
+
+public setAirbnbProperties(values: any) {
+  this.airbnbProperties = [];
+  this.appService.getAirbnbPropertiesByParams(values.basic.propertyType.name, values.additional.bedrooms).subscribe(data => {
+
+      var airbnbProperties = data as any[];
+      var dataSet: Chart.ChartDataSets[] = [];
+      for (var entity of airbnbProperties) {
+          var chartData: Chart.ChartDataSets = { data: [this.getPriceAsNumber(entity.price), this.getPriceAsNumber(entity.weekly_price), this.getPriceAsNumber(entity.monthly_price)], label: entity.name };
+          airbnbProperties
+          dataSet.push(chartData);
+          this.airbnbProperties.push(this.convertAirbnbToPropertyObject(entity))
+      }
+      this.setChartData(dataSet);
+  });
+}
+
+public convertAirbnbToPropertyObject(entity: any) {
+  var prop: Property = {
+      id: entity.id,
+      title: entity.name,
+      desc: entity.description,
+      propertyType: entity.property_type,
+      bedType: entity.bed_type,
+      area: {
+          value: entity.square_feet, unit: "ft²"
+      },
+      ratingsCount: 7,
+      ratingsValue: entity.review_scores_rating,
+      city: entity.city,
+      zipCode: [entity.zipcode],
+      neighborhood: [entity.neighbourhood],
+      street: entity.street,
+      priceDollar: { rent: this.getPriceAsNumber(entity.price) },
+      //location: Location,
+      bedrooms: entity.bedrooms,
+      bathrooms: entity.bathrooms,
+      garages: 0,
+      yearBuilt: 2018,
+      gallery: [{ small: entity.picture_url, medium: entity.picture_url, big: entity.xl_picture_url }],
+      lastUpdate: entity.calendar_updated,
+  } as Property
+
+  return prop;
+}
 
 }
-    
+
+
+
+
+
+
+
+
   
    
  

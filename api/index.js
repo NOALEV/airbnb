@@ -10,15 +10,14 @@ const io = require('socket.io')(server);
 
 
 const { mongoose } = require('./db/mongoose');
-<<<<<<< HEAD
-=======
 
->>>>>>> 1f8ae414dd92113e16d14ce2b7f7b8ca85d56437
 const sgMail = require('@sendgrid/mail');
 // Load in the mongoose models
 const { User }  = require('./db/models/user.model');
 const { Property }  = require('./db/models/property.model');
 const { Comment }  = require('./db/models/comment.model');
+const { AirbnbProperty } = require('./db/models/airbnbProperty.model'); 
+
 const jwt = require('jsonwebtoken');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -282,6 +281,22 @@ app.get('/property/:_userId/:propertyId', (req, res) => {
     });
 })
 
+app.get('/getAirbnbPropertiesByParams', (req, res) => {
+    AirbnbProperty.find({
+        //bedrooms: req.bedrooms,
+        //propertyType: req.propertyType,
+        weekly_price: { "$nin": [null, ""] },
+        monthly_price: { "$nin": [null, ""] },
+        price: { "$nin": [null, ""] }
+           
+    }).sort({ viewCount: -1 }).limit(10)
+        .then((properties) => {
+            res.send(properties);
+        }).catch((e) => {
+            res.send(e);
+        });
+})
+
 
 /**
  * POST /apartments
@@ -290,9 +305,9 @@ app.get('/property/:_userId/:propertyId', (req, res) => {
 app.post('/property',  (req, res) => {
     // We want to create a new apartment and return the new list document back to the user (which includes the id)
     // The apartment information (fields) will be passed in via the JSON request body
-   
 
     let newProperty= new Property();
+    let body = req.body.values;
     newProperty.title=body.basic.title;
     newProperty.desc=body.basic.desc;
     newProperty.propertyType=body.basic.propertyType.name;
@@ -301,7 +316,7 @@ app.post('/property',  (req, res) => {
     newProperty.city=body.address.city.name;
     newProperty.zipCode=body.address.zipCode;
     newProperty.neighborhood=body.address.neighborhood;
-    newProperty.street=body.address.street.name;
+    newProperty.street=body.address.street.name
     newProperty.lat=body.address.lat;
     newProperty.lng=body.address.lng;
     newProperty.bedrooms=body.additional.bedrooms;

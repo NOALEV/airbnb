@@ -47,6 +47,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
  
 import { PipesModule } from '../theme/pipes/pipes.module';
 import { DirectivesModule } from '../theme/directives/directives.module'; 
+import { ChartsModule } from 'ng2-charts';
 
 
 import { HeaderImageComponent } from './header-image/header-image.component';
@@ -67,6 +68,7 @@ import { OurAgentsComponent } from './our-agents/our-agents.component';
 import { MissionComponent } from './mission/mission.component';
 import { OurServicesComponent } from './our-services/our-services.component';
 import { LogoComponent } from './logo/logo.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   imports: [
@@ -110,7 +112,8 @@ import { LogoComponent } from './logo/logo.component';
     MatStepperModule,
     PerfectScrollbarModule,
     PipesModule,
-    DirectivesModule
+        DirectivesModule, 
+    ChartsModule
   ],
   exports: [
     RouterModule,
@@ -152,8 +155,10 @@ import { LogoComponent } from './logo/logo.component';
     MatStepperModule,
     PerfectScrollbarModule,
     PipesModule,
-    DirectivesModule, 
-    LogoComponent,
+      DirectivesModule, 
+    ChartsModule,
+      LogoComponent,
+      ChartComponent,
     HeaderImageComponent,
     HeaderCarouselComponent,
     PropertyItemComponent,
@@ -173,7 +178,8 @@ import { LogoComponent } from './logo/logo.component';
     OurServicesComponent
   ],
   declarations: [ 
-    LogoComponent,
+      LogoComponent,
+      ChartComponent,
     HeaderImageComponent,
     HeaderCarouselComponent,
     PropertyItemComponent,
