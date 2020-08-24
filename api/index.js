@@ -17,6 +17,8 @@ const { User }  = require('./db/models/user.model');
 const { Property }  = require('./db/models/property.model');
 const { Comment }  = require('./db/models/comment.model');
 const { AirbnbProperty } = require('./db/models/airbnbProperty.model'); 
+const { AllProperty }  = require('./db/models/all_property.model');
+
 
 const jwt = require('jsonwebtoken');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -296,6 +298,20 @@ app.get('/getAirbnbPropertiesByParams', (req, res) => {
             res.send(e);
         });
 })
+
+//get all properties
+app.get('/getAllAirbnbProperties', (req, res) => {
+    // We want to return an array of all the apartments  
+    console.log(1);
+    AllProperty.find().limit(500).then((properties)=> {
+      console.log(2);
+      res.send(properties);
+      console.log(3);
+    }).catch((e) => {
+        res.send(e);
+    });
+})
+
 
 
 /**
