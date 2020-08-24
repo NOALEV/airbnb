@@ -18,6 +18,7 @@ export class AccountComponent implements OnInit {
   public links = [ 
     { name: 'My Properties', href: 'my-properties', icon: 'view_list' },
     { name: 'Submit Property', href: '/submit-property', icon: 'add_circle' },  
+    { name: 'Properties By Neighbourhood', href: '/neighbourhood', icon: 'map' },
     { name: 'Logout', href: '/login', icon: 'power_settings_new' },    
   ]; 
 
