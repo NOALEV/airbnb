@@ -22,7 +22,8 @@ export const routes: Routes = [
             { path: 'register', loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule) },
             { path: 'terms-conditions', loadChildren: () => import('./pages/terms-conditions/terms-conditions.module').then(m => m.TermsConditionsModule) },
             { path: 'account', loadChildren: () => import('./pages/account/account.module').then(m => m.AccountModule) }, 
-            { path: 'submit-property', loadChildren: () => import('./pages/submit-property/submit-property.module').then(m => m.SubmitPropertyModule) }   
+            { path: 'submit-property', loadChildren: () => import('./pages/submit-property/submit-property.module').then(m => m.SubmitPropertyModule) },   
+            { path: 'neighbourhood', loadChildren: () => import('./pages/neighbourhood/neighbourhood.module').then(m => m.NeighbourhoodModule) } 
         ]
     },
     { path: 'landing', loadChildren: () => import('./pages/landing/landing.module').then(m => m.LandingModule) },
