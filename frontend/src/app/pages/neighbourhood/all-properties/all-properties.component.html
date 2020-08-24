@@ -1,0 +1,32 @@
+<div class="p-3">
+    <div class="theme-container">
+  
+      <div fxLayout="row" fxLayoutAlign="center center" class="my-3">
+          <mat-card [style.max-width.px]="1000">
+            <div style="margin-bottom: 40px;">  
+                <mat-select style="width: 200px;border: 1px solid black" placeholder="Select Neighbourhood"  (selectionChange)="onChange($event)">
+                    <mat-option *ngFor="let neighbourhood of nh" [value]="neighbourhood">
+                        {{neighbourhood}}
+                    </mat-option>
+                </mat-select>
+            </div>
+            <div> 
+                <agm-map style="width: 900px"  [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]="true" [fullscreenControl]="true" (mapClick)="onMapClick($event)">
+                    <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true" (markerClick)="onMarkerClick($event)"></agm-marker>
+                </agm-map>
+            
+            </div>             
+          </mat-card>
+      </div> 
+      <!--
+      <div fxLayout="row" fxFlex="100" class="px-2 mb-4" >  
+        <agm-map  [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]="true" [fullscreenControl]="true" (mapClick)="onMapClick($event)">
+            <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true" (markerClick)="onMarkerClick($event)"></agm-marker>
+        </agm-map>
+    
+      </div>
+     -->
+    </div>
+  
+ </div>
+  
