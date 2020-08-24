@@ -14,7 +14,7 @@
 
 <div class="px-3">
     <div class="theme-container">
-                
+               <!-- 
         <mat-card class="main-content-header">
 
             <app-properties-search 
@@ -25,14 +25,15 @@
                 (onSearchClick)="searchClicked()">
             </app-properties-search>
             
+            
         </mat-card>  
-    
+    -->
     </div>
     
     <div class="theme-container"> 
 
         <div fxLayout="row wrap" class="properties-wrapper">
-            
+            <!--
             <div fxFlex="100" fxLayoutAlign="start start" class="p-2"> 
                 <mat-chip-list [ngClass]="(settings.rtl) ? 'ml-2' : 'mr-2'">
                     <mat-chip selected disableRipple="true" color="warn" class="uppercase ws-nowrap">
@@ -44,7 +45,9 @@
                     (onRemoveSearchField)="removeSearchField($event)">
                 </app-properties-search-results-filters>                 
             </div>
-            <div fxFlex="100" class="p-2">                
+            -->
+            <div fxFlex="100" class="p-2">        
+                <!--       
                 <app-properties-toolbar [isHomePage]="true" 
                                         (onChangeCount)="changeCount($event)"
                                         (onChangeSorting)="changeSorting($event)"
@@ -64,6 +67,7 @@
                         {{message}}
                     </mat-chip> 
                 </mat-chip-list> 
+                --> 
             </div>
 
         </div>
