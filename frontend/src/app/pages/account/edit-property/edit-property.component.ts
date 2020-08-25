@@ -344,7 +344,6 @@ console.log();
   {
    if (this.submitForm.valid) {
       this.propertyService.updateProperty(this.currentPropertyId,values).subscribe((res: HttpResponse<any>) => {
-        this.router.navigate(['/myproperties']);
 
       });
 

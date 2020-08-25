@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const CommentSchema = new mongoose.Schema({
-    title: {
+    email: {
         type: String,
         required: true,
         minlength: 1,

@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   public viewType: string = 'grid';
   public viewCol: number = 25;
   public count: number = 8;
+  public limiTo:number ;
   public sort: string;
   public searchFields: any;
   public removedSearchField: string;
@@ -94,34 +95,19 @@ export class HomeComponent implements OnInit {
       var propertysArr :Property[];
       propertysArr= <Property[]> data;
       this.properties=propertysArr
-      
+     
       if(this.properties && this.properties.length > 0){  
         this.settings.loadMore.page++;
         this.pagination.page = this.settings.loadMore.page; 
       }
-      let result = this.filterData(data); 
-      if(result.data.length == 0){
-        this.properties.length = 0;
+      
+      if(this.properties.length == 0){
+       
         this.pagination = new Pagination(1, this.count, null, 2, 0, 0);  
         this.message = 'No Results Found';
         return false;
       } 
-      if(this.properties && this.properties.length > 0){  
-        this.properties = this.properties.concat(result.data);          
-      }
-      else{
-        this.properties = result.data;  
-      }
-      this.pagination = result.pagination;
-      this.message = null;
-
-      if(this.properties.length == this.pagination.total){
-        this.settings.loadMore.complete = true;
-        this.settings.loadMore.result = this.properties.length;
-      }
-      else{
-        this.settings.loadMore.complete = false;
-      }
+     
     })
   }
 

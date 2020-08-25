@@ -35,7 +35,7 @@ export class MyPropertiesComponent implements OnInit {
   public remove(property:Property) {
     var _userId=this.propertyService.getUserId();
 
-    this.propertyService.deleteApartment(_userId).subscribe((res: any) =>{
+    this.propertyService.deleteApartment(property._id,_userId).subscribe((res: any) =>{
     const index: number = this.dataSource.data.indexOf(property);    
     if (index !== -1) {
       this.dataSource.data.splice(index,1);

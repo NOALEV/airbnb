@@ -77,7 +77,7 @@ export class AppService {
     }
 
     public addToCompare(property: Property, component, direction) {
-        if (!this.Data.compareList.filter(item => item.id == property.id)[0]) {
+        if (!this.Data.compareList.filter(item => item._id == property._id)[0]) {
             this.Data.compareList.push(property);
             this.bottomSheet.open(component, {
                 direction: direction
@@ -90,7 +90,7 @@ export class AppService {
     }
 
     public addToFavorites(property: Property, direction) {
-        if (!this.Data.favorites.filter(item => item.id == property.id)[0]) {
+        if (!this.Data.favorites.filter(item => item._id == property._id)[0]) {
             this.Data.favorites.push(property);
             this.snackBar.open('The property "' + property.title + '" has been added to favorites.', '×', {
                 verticalPosition: 'top',

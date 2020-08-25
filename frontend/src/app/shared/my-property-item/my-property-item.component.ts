@@ -2,35 +2,43 @@ import { Component, OnInit, Input, ViewChild, SimpleChange } from '@angular/core
 import { SwiperDirective, SwiperConfigInterface, SwiperPaginationInterface } from 'ngx-swiper-wrapper'; 
 import { Property } from '../../app.models';
 import { Settings, AppSettings } from '../../app.settings';
+import { PropertyService } from 'src/app/property.service';
 
 import { AppService } from '../../app.service'; 
 import { CompareOverviewComponent } from '../compare-overview/compare-overview.component'; 
 
 @Component({
-  selector: 'app-property-item',
-  templateUrl: './property-item.component.html',
-  styleUrls: ['./property-item.component.scss'] 
+  selector: 'app-my-property-item',
+  templateUrl: './my-property-item.component.html',
+  styleUrls: ['./my-property-item.component.scss'] 
 })
-export class PropertyItemComponent implements OnInit {
+export class MyPropertyItemComponent implements OnInit {
+
   @Input() property: Property;
-  @Input() type: string;
   @Input() viewType: string = "grid";
   @Input() viewColChanged: boolean = false; 
   @Input() fullWidthPage: boolean = true;   
   public column:number = 4;
-  // public address:string; 
+ // public address:string; 
   @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
   public config: SwiperConfigInterface = {};
+
   private pagination: SwiperPaginationInterface = {
     el: '.swiper-pagination',
     clickable: true
   };
   public settings: Settings;
-  constructor(public appSettings:AppSettings, public appService:AppService) {
+  constructor(public appSettings:AppSettings, public appService:AppService,private propertyService: PropertyService) {
     this.settings = this.appSettings.settings;
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+
+   
+    
+  }
+  
+  
 
   ngAfterViewInit(){
     this.initCarousel();

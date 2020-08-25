@@ -6,10 +6,11 @@ import { InputFileModule } from 'ngx-input-file';
 import { AgmCoreModule } from '@agm/core';  
 import { AccountComponent } from './account.component';
 import { DashboardComponent } from './dashboard/dashboard.component'; 
-import { MyPropertiesComponent } from './my-properties/my-properties.component';
+
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
+import { MyPropertiesComponent } from './my-properties/my-properties.component';
 
 export const routes = [
   { 

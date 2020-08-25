@@ -329,10 +329,10 @@ app.post('/property',  (req, res) => {
     newProperty.propertyType=body.basic.propertyType.name;
     newProperty.cancellationPolicy=body.basic.cancellationPolicy.name;
     newProperty.location=body.address.location;
-    newProperty.city=body.address.city.name;
+    newProperty.city=body.address&&body.addres.city?body.addres.city.name:'';
     newProperty.zipCode=body.address.zipCode;
     newProperty.neighborhood=body.address.neighborhood;
-    newProperty.street=body.address.street.name
+    newProperty.street=body.address&&body.address.street?body.address.street.name:'';
     newProperty.lat=body.address.lat;
     newProperty.lng=body.address.lng;
     newProperty.bedrooms=body.additional.bedrooms;
@@ -438,10 +438,12 @@ app.patch('/properties/:id', (req, res) => {
  * DELETE /apartments/:id
  * Purpose: Delete a apartment
  */
-app.delete('/properties/:id', (req, res) => {
+app.delete('/properties/:id/:_userId', (req, res) => {
     // We want to delete the specified apartment (document with id in the URL)
     Property.findOneAndRemove({
-        _userId: req.params.id
+        _id: req.params.id,
+        _userId:req.params._userId
+        
     }).then((removedApartmenttDoc) => {
         res.send(removedApartmenttDoc);
     })

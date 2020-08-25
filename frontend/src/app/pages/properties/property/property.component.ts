@@ -179,7 +179,7 @@ export class PropertyComponent implements OnInit {
   }
 
   public onCompare(){
-    return this.appService.Data.compareList.filter(item=>item.id == this.property.id)[0];
+    return this.appService.Data.compareList.filter(item=>item._id == this.property._id)[0];
   }
 
   public addToFavorites(){
@@ -187,7 +187,7 @@ export class PropertyComponent implements OnInit {
   }
 
   public onFavorites(){
-    return this.appService.Data.favorites.filter(item=>item.id == this.property.id)[0];
+    return this.appService.Data.favorites.filter(item=>item._id == this.property._id)[0];
   }
 
   public getRelatedProperties(){

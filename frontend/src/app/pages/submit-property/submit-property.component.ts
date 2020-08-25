@@ -340,29 +340,30 @@ public setAirbnbProperties(values: any) {
 
 public convertAirbnbToPropertyObject(entity: any) {
   var prop: Property = {
-      id: entity.id,
-      title: entity.name,
-      desc: entity.description,
-      propertyType: entity.property_type,
-      bedType: entity.bed_type,
-      area: {
-          value: entity.square_feet, unit: "ft²"
-      },
-      ratingsCount: 7,
-      ratingsValue: entity.review_scores_rating,
-      city: entity.city,
-      zipCode: [entity.zipcode],
-      neighborhood: [entity.neighbourhood],
-      street: entity.street,
-      priceDollar: { rent: this.getPriceAsNumber(entity.price) },
-      //location: Location,
-      bedrooms: entity.bedrooms,
-      bathrooms: entity.bathrooms,
-      garages: 0,
-      yearBuilt: 2018,
-      gallery: [{ small: entity.picture_url, medium: entity.picture_url, big: entity.xl_picture_url }],
-      lastUpdate: entity.calendar_updated,
-  } as Property
+    fromKaggle:true,
+    id: entity.id,
+    title: entity.name,
+    desc: entity.description,
+    propertyType: entity.property_type,
+    bedType: entity.bed_type,
+    area: {
+      value: entity.square_feet, unit: "ft²"
+    },
+    ratingsCount: 7,
+    ratingsValue: entity.review_scores_rating,
+    city: entity.city,
+    zipCode: [entity.zipcode],
+    neighborhood: [entity.neighbourhood],
+    street: entity.street,
+    priceDollar: { rent: this.getPriceAsNumber(entity.price) },
+    //location: Location,
+    bedrooms: entity.bedrooms,
+    bathrooms: entity.bathrooms,
+    garages: 0,
+    yearBuilt: 2018,
+    images: [{ data: entity.picture_url }],
+    lastUpdate: entity.calendar_updated,
+  } as unknown as Property
 
   return prop;
 }

@@ -30,8 +30,8 @@ export class PropertyService {
   }
 
 
-  deleteApartment(id: string) {
-    return this.webReqService.delete(`properties/${id}`);
+  deleteApartment(id: string ,_userId:string) {
+    return this.webReqService.delete(`properties/${id}/${_userId}`);
   }
 
   getNewAccessToken() {

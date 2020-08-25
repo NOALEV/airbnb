@@ -5,31 +5,28 @@
         <div fxLayout="row wrap" class="property-status">
             <span *ngFor="let status of property.propertyStatus" [style.background-color]="getStatusBgColor(status)">{{status}}</span>
         </div>
-        <div >
-            <div *ngIf="!property.images || !property.images.length" >
-                <img width="290" height="192" src="https://www.theblock.co.il/wp-content/uploads/2019/01/תמונה-בית-279x220.jpg">
-            </div>
-           
-            <div *ngIf="property.images && property.images.length == 1" class="mat-card-image w-100 m-0">
-                <img [src]="property.images[0].data">
-            </div>
-            <div *ngIf="property.images && property.images.length > 1" class="mat-card-image w-100 m-0">
-                <div class="swiper-container" [swiper]="config">
-                    <div class="swiper-wrapper"> 
-                        <div *ngFor="let image of property.images" class="swiper-slide">
-                            <img [attr.data-src]="image.data" class="swiper-lazy">
-                            <div class="swiper-lazy-preloader"></div>
-                        </div> 
-                    </div>  
-                    <div class="swiper-pagination white"></div>  
-                    <button mat-icon-button class="swiper-button-prev swipe-arrow"><mat-icon class="mat-icon-lg">keyboard_arrow_left</mat-icon></button>
-                    <button mat-icon-button class="swiper-button-next swipe-arrow"><mat-icon class="mat-icon-lg">keyboard_arrow_right</mat-icon></button>
-                </div>
-            </div>
-
+        <div *ngIf="!property.images || !property.images.length " class=" w-100 m-0">
+        <img src="https://www.renovations-jerusalem.co.il/wp-content/uploads/%D7%90%D7%99%D7%98%D7%95%D7%9D-%D7%92%D7%92%D7%95%D7%AA-%D7%91%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D-%D7%90%D7%99%D7%99%D7%A7%D7%95%D7%9F.png" >
         </div>
-     
-    
+        <div *ngIf="property.images && property.images.length == 1" class="mat-card-image w-100 m-0">
+            <img [src]="property.images[0].data">
+        </div>
+        <div *ngIf="property.images && property.images.length > 1" class="mat-card-image w-100 m-0">
+            <div class="swiper-container" [swiper]="config">
+                <div class="swiper-wrapper"> 
+                    <div *ngFor="let image of property.images" class="swiper-slide">
+                        <img [src]="property.images[0].data"class="swiper-lazy">
+                        <div class="swiper-lazy-preloader"></div>
+                    </div> 
+                </div>  
+                <div class="swiper-pagination white"></div>  
+                <button mat-icon-button class="swiper-button-prev swipe-arrow"><mat-icon class="mat-icon-lg">keyboard_arrow_left</mat-icon></button>
+                <button mat-icon-button class="swiper-button-next swipe-arrow"><mat-icon class="mat-icon-lg">keyboard_arrow_right</mat-icon></button>
+            </div>
+        </div>
+        
+
+      
 
     </div>
     <div fxFlex="100" [fxFlex.gt-sm]="(viewType=='list') ? 60 : 100" [fxFlex.sm]="(viewType=='list') ? 50 : 100" class="p-3">
@@ -37,8 +34,7 @@
         <div fxLayout="column" fxLayoutAlign="start stretch" class="h-100">
             <mat-card-content class="mb-0">
               
-                <h1  *ngIf="property.fromKaggle" class="title">{{property.title}}</h1>
-                <h1 *ngIf="!property.fromKaggle" class="title"><a [routerLink]="['/account/my-properties']">{{property.title}}</a></h1>
+                <h1 class="title"><a [routerLink]="['/account/my-properties']">{{property.title}}</a></h1>
 
                 <p fxLayout="row" class="address">
                     <mat-icon class="text-muted">location_on</mat-icon>
@@ -46,7 +42,7 @@
                 </p>
 
                 <div fxLayout="row" fxLayoutAlign="space-between center">
-               
+                
                     <app-rating [ratingsCount]="property.ratingsCount" [ratingsValue]="property.ratingsValue"></app-rating>
                 </div>
 
@@ -63,11 +59,15 @@
             </mat-card-content>
             <div class="sticky-footer-helper" fxFlex="grow"></div>
             <mat-card-actions class="m-0 p-0" fxLayoutAlign="space-between center"> 
-                
-                <div *ngIf="!property.fromKaggle" >
-                    
-                    <a [routerLink]="['/properties', property.id]" mat-stroked-button color="primary" class="uppercase">Prediction</a>
-                    <mat-icon _ngcontent-vkv-c349="" role="img" color="primary" class="mat-icon notranslate mat-icon-xlg mat-primary material-icons" aria-hidden="true" ng-reflect-color="primary">monetization_on</mat-icon>
+               
+                <div>
+                  
+
+
+                    <a 
+                    [routerLink]="['/properties', property.id]" mat-stroked-button color="primary"  class="uppercase"  >Prediction
+                    <mat-icon color="primary" class="mat-icon-xlg">monetization_on</mat-icon>
+                </a>
                 </div> 
             </mat-card-actions> 
         </div>        
