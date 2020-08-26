@@ -31,8 +31,8 @@ export class EditPropertyComponent implements OnInit {
   public cities = [];
   public neighborhoods = [];
   public streets = [];
-  public lat: number = 40.678178;
-  public lng: number = -73.944158;
+  public lat: number ;
+  public lng: number ;
   public zoom: number = 12; 
   public currentPropertyId: string;
   constructor(public appService:AppService, 
@@ -64,7 +64,9 @@ export class EditPropertyComponent implements OnInit {
         city: ['', Validators.required],
         zipCode: '',
         neighborhood: '',
-        street: ''
+        street: '',
+        lat: '',
+        lng:''
       }),
       additional: this.fb.group({
         bedrooms: '',
@@ -75,7 +77,7 @@ export class EditPropertyComponent implements OnInit {
       }),
    
     }); 
- 
+    this.setCurrentPosition();
     this.placesAutocomplete();
     
     this.sub = this.activatedRoute.params.subscribe(params => {   
@@ -165,17 +167,30 @@ export class EditPropertyComponent implements OnInit {
       });
     }
   }
-  private placesAutocomplete(){ 
-    this.mapsAPILoader.load().then(() => {
+  private placesAutocomplete(){  
+   
+    this.mapsAPILoader.load().then(() => { 
+      var cityBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(52.327157, 13.781318),
+        new google.maps.LatLng(52.684707, 13.066864)
+        );
       let autocomplete = new google.maps.places.Autocomplete(this.addressAutocomplete.nativeElement, {
-        types: ["address"]
-      });
-      autocomplete.addListener("place_changed", () => {
+       
+        bounds: cityBounds,
+        types: ["address"],
+        strictBounds: false,
+        componentRestrictions: {
+          country: "DE",
+        }
+      });  
+      autocomplete.addListener("place_changed", () => { 
         this.ngZone.run(() => { 
+         
           let place: google.maps.places.PlaceResult = autocomplete.getPlace(); 
           if (place.geometry === undefined || place.geometry === null) {
             return;
           };
+
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng(); 
           this.getAddress();
@@ -283,6 +298,8 @@ export class EditPropertyComponent implements OnInit {
         }
       })
     }
+    this.submitForm.controls.address.get('lat').setValue(this.lat); 
+    this.submitForm.controls.address.get('lng').setValue(this.lng); 
 
   }
 

@@ -329,10 +329,10 @@ app.post('/property',  (req, res) => {
     newProperty.propertyType=body.basic.propertyType.name;
     newProperty.cancellationPolicy=body.basic.cancellationPolicy.name;
     newProperty.location=body.address.location;
-    newProperty.city=body.address&&body.addres.city?body.addres.city.name:'';
+    newProperty.city=body.address && body.address.city ? body.address.city.name:'';
     newProperty.zipCode=body.address.zipCode;
     newProperty.neighborhood=body.address.neighborhood;
-    newProperty.street=body.address&&body.address.street?body.address.street.name:'';
+    newProperty.street=body.address && body.address.street ? body.address.street.name:'';
     newProperty.lat=body.address.lat;
     newProperty.lng=body.address.lng;
     newProperty.bedrooms=body.additional.bedrooms;
@@ -418,6 +418,7 @@ app.patch('/properties/:id', (req, res) => {
         property.Hangers=body.additional.features[17].selected;
         property.StoveTop=body.additional.features[18].selected;
         property.Shampoo=body.additional.features[19].selected;
+        property.images=[];
         if(body.basic.gallery){
             for(i=0;i<body.basic.gallery.length;i++)
             {

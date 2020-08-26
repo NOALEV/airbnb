@@ -86,7 +86,6 @@ export class SubmitPropertyComponent implements OnInit {
   public onSelectionChange(e:any){ 
     if(e.selectedIndex == 4){   
       this.horizontalStepper._steps.forEach(step => step.editable = false);
-      console.log(this.submitForm.value);      
     }
   }
   
@@ -159,7 +158,7 @@ export class SubmitPropertyComponent implements OnInit {
  
   public getAddress(){    
     this.appService.getAddress(this.lat, this.lng).subscribe(response => {  
-      console.log(response);
+      
       if(response['results'].length){
         let address = response['results'][0].formatted_address; 
         this.submitForm.controls.address.get('location').setValue(address); 

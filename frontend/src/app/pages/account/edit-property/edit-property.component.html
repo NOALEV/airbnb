@@ -190,9 +190,9 @@
             <mat-icon>navigate_before</mat-icon>
             <span class="mx-1 uppercase">Back</span>  
           </button>
-          <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" type="submit" (click)="onProperryFormSubmit(submitForm.value)">
+          <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" type="submit" [routerLink]="['/account/my-properties']"  (click)="onProperryFormSubmit(submitForm.value)">
             <span class="mx-1 uppercase">Update</span>
-            <a [routerLink]="['/account/my-properties']"></a>                    
+                              
             <mat-icon>navigate_next</mat-icon>
           </button> 
         </div>  

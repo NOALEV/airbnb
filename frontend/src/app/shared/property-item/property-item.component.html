@@ -6,8 +6,8 @@
             <span *ngFor="let status of property.propertyStatus" [style.background-color]="getStatusBgColor(status)">{{status}}</span>
         </div>
         <div >
-            <div *ngIf="!property.images || !property.images.length" >
-                <img width="290" height="192" src="https://www.theblock.co.il/wp-content/uploads/2019/01/תמונה-בית-279x220.jpg">
+            <div *ngIf="!property.images || !property.images.length" class="mat-card-image  w-100 m-0">
+                <img class="empty" width="290" height="192" src="https://www.theblock.co.il/wp-content/uploads/2019/01/תמונה-בית-279x220.jpg">
             </div>
            
             <div *ngIf="property.images && property.images.length == 1" class="mat-card-image w-100 m-0">
@@ -42,7 +42,7 @@
 
                 <p fxLayout="row" class="address">
                     <mat-icon class="text-muted">location_on</mat-icon>
-                    <span>{{property.location}}</span>
+                    <span class="text">{{property.location}}</span>
                 </p>
 
                 <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -67,7 +67,6 @@
                 <div *ngIf="!property.fromKaggle" >
                     
                     <a [routerLink]="['/properties', property.id]" mat-stroked-button color="primary" class="uppercase">Prediction</a>
-                    <mat-icon _ngcontent-vkv-c349="" role="img" color="primary" class="mat-icon notranslate mat-icon-xlg mat-primary material-icons" aria-hidden="true" ng-reflect-color="primary">monetization_on</mat-icon>
                 </div> 
             </mat-card-actions> 
         </div>        

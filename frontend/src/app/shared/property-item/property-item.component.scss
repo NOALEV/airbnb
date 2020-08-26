@@ -20,7 +20,7 @@
         }
         .swiper-slide{              
             text-align: center;
-            padding-bottom: 66.25%;
+         
             position: relative;
             overflow: hidden;  
             background: rgba(0, 0, 0, 0.04);          
@@ -31,6 +31,10 @@
             left: 0;
             width: 100%;
             height: auto;
+            &.empty{
+                width: 290px;
+                 height:192px; 
+            }
         } 
     }
     .property-status{
@@ -58,6 +62,11 @@
         margin-top: 8px;
         .mat-icon{
             margin-left: -4px;
+        }
+        .text{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }  
     .price{ 
