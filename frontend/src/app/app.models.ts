@@ -74,7 +74,7 @@ export class Pagination {
 }
 
 export class Feedback {
-    constructor(public email: string,
+    constructor(public username: string,
                 public message: string,
                ){ }
 }

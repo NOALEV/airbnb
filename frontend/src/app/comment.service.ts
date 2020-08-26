@@ -19,10 +19,15 @@ export class CommentService {
 
   createComment(values: object) {
     
-    values["_userId"]=this.getUserId;
+    values["username"]=this.getUserName();
     // We want to send a web request to create a propery
     return this.webReqService.post('comments', { values });
   }
+  getUserName() {
+    var user=JSON.parse( localStorage.getItem('user'));
+    return user?user.username:'';
+  }
+ 
 
   updateComment(id: string, values: object) {
     // We want to send a web request to update a list

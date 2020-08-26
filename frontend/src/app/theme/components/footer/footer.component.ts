@@ -279,7 +279,6 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.feedbackForm = this.formBuilder.group({ 
-      email: ['', Validators.compose([Validators.required, emailValidator])], 
       message: ['', Validators.required]
     });
     this.subscribeForm = this.formBuilder.group({
@@ -287,9 +286,9 @@ export class FooterComponent implements OnInit {
     })
   }
 
+
   public onFeedbackFormSubmit(values:Object):void {
-      
-    console.log(values);
+      console.log(values);
     if (this.feedbackForm.valid) {
         this.commentService.createComment(values).subscribe((res: HttpResponse<any>) => {
             
@@ -300,7 +299,7 @@ export class FooterComponent implements OnInit {
   }
   public reset(){     
     this.feedbackForm.reset({ 
-      email: null,
+     
       message: null, 
     
     })

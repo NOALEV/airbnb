@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
        }; 
         
        this.authService.signup(user).subscribe((res: HttpResponse<any>) => {
+        
          var authUser ={
           username:profile.getEmail(), 
           password:profile.getId(),
@@ -172,8 +173,7 @@ export class LoginComponent implements OnInit {
   public onLoginFormSubmit(values:Object ,flag:boolean):void {
     if (this.loginForm.valid || flag) {
       this.authService.login(values).subscribe((res: HttpResponse<any>) => {
-        debugger;
-
+     
         if (res.status === 200 && res.body) {
   
           this.userService.setCurrent(res.body);

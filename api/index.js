@@ -233,7 +233,6 @@ app.post('/users/login', (req, res) => {
            
         })
     }).catch((e) => {
-        console.log(e);
         res.status(400).send(e);
     });
 })
@@ -466,7 +465,7 @@ function convertCurrency(amount, fromCurrency, toCurrency, cb) {
   
     var url = 'https://free.currconv.com/api/v7/convert?q='
               + query + '&compact=ultra&apiKey=' + apiKey;
-  console.log(url);
+ 
     https.get(url, function(res){
         var body = '';
   
@@ -506,8 +505,7 @@ app.get('/comments', (req, res) => {
     // We want to return an array of all the lists that belong to the authenticated user 
     let body = req.body.values;
     Comment.find({
-    }).then((comments) => {
-        console.log(comments)
+    }).then((comments) => {        
         res.send(comments);
     })
     });
@@ -520,11 +518,9 @@ app.post('/comments', (req, res) => {
     // We want to create a new comment and return the new comment document back to the user (which includes the id)
     // The comment information (fields) will be passed in via the JSON request body
     let body = req.body.values;
-    
     let newComment = new Comment();
-    newComment.email = body.email;
     newComment.message = body.message;
-    newComment._userId=body._userId;
+    newComment.username=body.username;
 
     newComment.save().then((commentDoc) => {
         // the full list document is returned (incl. id)
