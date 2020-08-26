@@ -14,4 +14,9 @@ export class Toolbar1Component implements OnInit {
   public sidenavToggle(){
     this.onMenuIconClick.emit();
   }
+  isUserConnected()
+  {
+    var user=JSON.parse( localStorage.getItem('user'));
+    return user;
+  }
 }

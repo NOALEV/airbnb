@@ -56,7 +56,8 @@ export class PropertyService {
   }
 
   getUserId() {
-    return localStorage.getItem('user-id');
+    var user=JSON.parse( localStorage.getItem('user'));
+    return user?user._id:'';
   }
   convertCurrency(amount:number,fromCurrency:string,toCurrency:string) {
     return this.webReqService.get(`convertCurrency/${amount}/${fromCurrency}/${toCurrency}`);

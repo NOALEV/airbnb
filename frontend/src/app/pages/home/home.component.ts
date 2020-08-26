@@ -68,7 +68,13 @@ export class HomeComponent implements OnInit {
     this.getFeaturedProperties();
 
     
+  } 
+  isUserConnected()
+  {
+    var user=JSON.parse( localStorage.getItem('user'));
+    return user;
   }
+  
 
   ngDoCheck(){
     if(this.settings.loadMore.load){     
@@ -174,5 +180,6 @@ export class HomeComponent implements OnInit {
       this.featuredProperties = properties;
     })
   } 
+  
 
 }
