@@ -137,9 +137,7 @@ export class LoginComponent implements OnInit {
 
   
   signInWithFB(): void {
-   
- 
-      window['FB'].login((response) => {
+       window['FB'].login((response) => {
           console.log('login response',response);
           if (response.authResponse) {
    

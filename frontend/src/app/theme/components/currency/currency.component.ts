@@ -9,7 +9,7 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./currency.component.scss']
 })
 export class CurrencyComponent implements OnInit {
-  public currencies = ['USD', 'EUR','ILS'];
+  public currencies = ['USD', 'EUR'];
   public currency:any; 
   public settings: Settings;
   constructor(public appSettings:AppSettings, private propertyService: PropertyService,) {
