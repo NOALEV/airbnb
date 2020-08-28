@@ -43,7 +43,7 @@
                         <app-social-icons [iconSize]="'lg'" fxLayout="row" fxLayoutAlign="start center" class="desc"></app-social-icons>                    
                     </div>
 
-                    <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="45" ngClass.xs="pt-5"> 
+                    <div *ngIf="isUserConnected()" fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="45" ngClass.xs="pt-5"> 
                         <h2 class="uppercase">Feedback</h2>
                         <p class="desc">We want your feedback about everything</p>
                         <form [formGroup]="feedbackForm"  class="custom-form pt-2">     

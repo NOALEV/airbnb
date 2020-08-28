@@ -285,6 +285,11 @@ export class FooterComponent implements OnInit {
       email: ['', Validators.compose([Validators.required, emailValidator])]
     })
   }
+  isUserConnected()
+  {
+    var user=JSON.parse( localStorage.getItem('user'));
+    return user;
+  }
 
 
   public onFeedbackFormSubmit(values:Object):void {
