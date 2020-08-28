@@ -30,7 +30,7 @@ export class GraphPropertyComponent implements OnInit {
   }
 
   public setAirbnbProperties(values: any) {
-    this.appService.getAirbnbPropertiesByParams(values.name, values.bedrooms).subscribe(data => {
+    this.appService.getAirbnbPropertiesByParams(values.propertyType, values.bedrooms).subscribe(data => {
   
         var airbnbProperties = data as any[];
         var dataSet: Chart.ChartDataSets[] = [];
