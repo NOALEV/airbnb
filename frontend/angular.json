@@ -30,7 +30,7 @@
         }
       },
       "root": "",
-      "sourceRoot": "src", 
+      "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
@@ -143,7 +143,10 @@
           }
         }
       }
-    } 
+    }
   },
-  "defaultProject": "housekey"
+  "defaultProject": "housekey",
+  "cli": {
+    "analytics": false
+  }
 }
