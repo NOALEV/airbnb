@@ -11,6 +11,9 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { MyPropertiesComponent } from './my-properties/my-properties.component';
+import { MapPropertyComponent } from './map-property/map-property.component';
+import { GraphPropertyComponent } from './graph-property/graph-property.component';
+import { SimilarPropertiesComponent } from './similar-properties/similar-properties.component';
 
 export const routes = [
   { 
@@ -19,6 +22,9 @@ export const routes = [
       { path: '', redirectTo: 'profile', pathMatch: 'full' }, 
       { path: 'my-properties', component: MyPropertiesComponent },
       { path: 'my-properties/:id', component: EditPropertyComponent },
+      { path: 'my-properties/:id/map', component: MapPropertyComponent },
+      { path: 'my-properties/:id/graph', component: GraphPropertyComponent },
+      { path: 'my-properties/:id/similar', component: SimilarPropertiesComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'profile', component: ProfileComponent }
     ]
@@ -32,14 +38,14 @@ export const routes = [
     MyPropertiesComponent, 
     FavoritesComponent, 
     ProfileComponent, 
-    EditPropertyComponent
+    EditPropertyComponent, GraphPropertyComponent, SimilarPropertiesComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule,
     InputFileModule,
-    AgmCoreModule
+    AgmCoreModule,
+    SharedModule
   ]
 })
 export class AccountModule { }
