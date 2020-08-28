@@ -31,7 +31,7 @@ export class SimilarPropertiesComponent implements OnInit {
 
   public setAirbnbProperties(values: any) {
     this.airbnbProperties = [];
-    this.appService.getAirbnbPropertiesByParams(values.name, values.bedrooms).subscribe(data => {
+    this.appService.getAirbnbPropertiesByParams(values.propertyTypes, values.bedrooms).subscribe(data => {
   
         var airbnbProperties = data as any[];
         for (var entity of airbnbProperties) {
