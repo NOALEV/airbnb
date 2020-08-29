@@ -23,7 +23,8 @@ export class EditPropertyComponent implements OnInit {
   public features = [];
   public propertyTypes = [];
   public bedTypes = [];
-  
+  public roomTypes = [];
+
   public cancellationPolicyes = [];
 
 
@@ -50,12 +51,16 @@ export class EditPropertyComponent implements OnInit {
     this.bedTypes = this.appService.getBedTypes();
     this.cancellationPolicyes = this.appService.getcancellationPolicy();
     this.propertyStatuses = this.appService.getPropertyStatuses();
-   
+    this.neighborhoods=this.appService.getNeighborhoods();
+    this.roomTypes=this.appService.getRoomTypes();
+      
     this.submitForm = this.fb.group({
       basic: this.fb.group({
         title: [null, Validators.required],
         desc: null,
         propertyType: [null, Validators.required],
+        roomType: [null, Validators.required],
+
         cancellationPolicy:'',
         gallery: null
       }),
@@ -63,7 +68,7 @@ export class EditPropertyComponent implements OnInit {
         location: ['', Validators.required],
         city: ['', Validators.required],
         zipCode: '',
-        neighborhood: '',
+        neighborhood: ['', Validators.required],
         street: '',
         lat: '',
         lng:''

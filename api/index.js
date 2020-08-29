@@ -390,6 +390,9 @@ app.patch('/properties/:id', (req, res) => {
         property.title=body.basic.title;
         property.desc=body.basic.desc;
         property.propertyType=body.basic.propertyType.name;
+        property.roomType=body.basic.roomType.name;
+        property.neighborhood=body.address.neighborhood.name;
+
         property.cancellationPolicy=body.basic.cancellationPolicy?body.basic.cancellationPolicy.name:"";
         property.location=body.address.location;
         property.city=body.address.city.name;

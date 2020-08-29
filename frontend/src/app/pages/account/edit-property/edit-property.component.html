@@ -51,6 +51,17 @@
               <mat-error *ngIf="submitForm.get('basic')['controls'].propertyType.errors?.required">Property Type is required</mat-error>                               
           </mat-form-field>
         </div>
+        <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Room Type</mat-label>
+              <mat-select placeholder="Select Room Type" formControlName="roomType" required>
+                  <mat-option *ngFor="let roomType of roomTypes" [value]="roomType">
+                      {{roomType.name}}
+                  </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitForm.get('basic')['controls'].roomType.errors?.required">roomType Type is required</mat-error>
+          </mat-form-field>
+      </div>
     
         <div fxFlex="100" class="step-section pb-2">
             <p class="mb-0"><span class="uppercase fw-500">Gallery</span><span class="text-muted mx-3">(max 8 images)</span></p>  
@@ -118,6 +129,17 @@
           </mat-form-field>
         </div> 
       
+        <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
+          <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Neighborhood</mat-label>
+              <mat-select placeholder="Select Neighborhood" formControlName="neighborhood" required>
+                  <mat-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">
+                      {{neighborhood.name}}
+                  </mat-option>
+              </mat-select>
+              <mat-error *ngIf="submitForm.get('address')['controls'].neighborhood.errors?.required">Neighborhood is required</mat-error>
+          </mat-form-field>
+      </div>
         <div fxFlex="100" class="mt-3 p-2" fxLayoutAlign="space-between center">
           <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="prevStep()" type="button">
             <mat-icon>navigate_before</mat-icon>
