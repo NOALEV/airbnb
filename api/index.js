@@ -282,16 +282,18 @@ app.get('/property/:_userId/:propertyId', (req, res) => {
     });
 })
 
-app.get('/getAirbnbPropertiesByParams', (req, res) => {
+app.get('/getAirbnbPropertiesByParams/:propertyType/:bedrooms', (req, res) => {
+        
     AirbnbProperty.find({
-        //bedrooms: req.bedrooms,
-        //propertyType: req.propertyType,
+        bedrooms: req.params.bedrooms,
+        property_type: req.params.propertyType,
         weekly_price: { "$nin": [null, ""] },
         monthly_price: { "$nin": [null, ""] },
         price: { "$nin": [null, ""] }
            
     }).sort({ viewCount: -1 }).limit(10)
         .then((properties) => {
+            console.log(properties.length);
             res.send(properties);
         }).catch((e) => {
             res.send(e);
@@ -301,11 +303,8 @@ app.get('/getAirbnbPropertiesByParams', (req, res) => {
 //get all properties
 app.get('/getAllAirbnbProperties', (req, res) => {
     // We want to return an array of all the apartments  
-    console.log(1);
     AllProperty.find().limit(500).then((properties)=> {
-      console.log(2);
       res.send(properties);
-      console.log(3);
     }).catch((e) => {
         res.send(e);
     });

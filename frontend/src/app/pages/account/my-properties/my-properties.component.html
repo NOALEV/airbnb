@@ -39,7 +39,14 @@
             <button mat-icon-button color="warn" (click)="remove(property)" matTooltip="Remove" class="remove">
                 <mat-icon>delete</mat-icon>
             </button> 
-        </td>
+            <a [routerLink]="['/account/my-properties', property._id,'graph']"mat-icon-button color="primary" matTooltip="Chart">
+              <mat-icon>bar_chart</mat-icon>
+            </a>
+            <a [routerLink]="['/account/my-properties', property._id,'similar']"mat-icon-button color="primary" matTooltip="Similar Properties">
+              <mat-icon>home</mat-icon>
+            </a>
+          
+         </td>
       </ng-container> 
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

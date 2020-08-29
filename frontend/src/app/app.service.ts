@@ -43,7 +43,7 @@ export class AppService {
 
     public getAirbnbPropertiesByParams(propertyType: string, bedrooms: number) {
         var request = { propertyType: propertyType, bedrooms: bedrooms };
-        return this.webReqService.get(`getAirbnbPropertiesByParams`, request);
+        return this.webReqService.get(`getAirbnbPropertiesByParams/${propertyType}/${bedrooms}`);
     }
 
     public getFeaturedProperties(): Observable<Property[]> {
@@ -603,93 +603,93 @@ export class AppService {
         return [
             {
                 id: 1,
-                fullName: 'Lusia Manuel',
-                desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',
+                fullName: 'Noa Lev ',
+                desc: 'A member of HouseKey.',
                 organization: 'HouseKey',
-                email: 'lusia.m@housekey.com',
-                phone: '(224) 267-1346',
+                email: 'noaa.lev@gmail.com',
+                phone: '054-3488462',
                 social: {
-                    facebook: 'lusia',
-                    twitter: 'lusia',
-                    linkedin: 'lusia',
-                    instagram: 'lusia',
+                    //facebook: 'lusia',
+                    //twitter: 'lusia',
+                    //linkedin: 'lusia',
+                    //instagram: 'lusia',
                     website: 'https://lusia.manuel.com'
                 },
                 ratingsCount: 6,
                 ratingsValue: 480,
-                image: 'assets/images/agents/a-1.jpg'
+                image: 'assets/images/agents/noa.jpg'
             },
             {
                 id: 2,
-                fullName: 'Andy Warhol',
-                desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',
+                fullName: 'Chani Diamant',
+                desc: 'A member of HouseKey.',
                 organization: 'HouseKey',
-                email: 'andy.w@housekey.com',
-                phone: '(212) 457-2308',
+                email: 'chanidiamant@gmail.com',
+                phone: '052-6971305',
                 social: {
-                    facebook: '',
-                    twitter: '',
-                    linkedin: '',
-                    instagram: '',
+                    //facebook: '',
+                    //twitter: '',
+                    //linkedin: '',
+                    //instagram: '',
                     website: 'https://andy.warhol.com'
                 },
                 ratingsCount: 4,
                 ratingsValue: 400,
-                image: 'assets/images/agents/a-2.jpg'
+                image: 'assets/images/agents/chani.jpg'
             },
             {
                 id: 3,
-                fullName: 'Tereza Stiles',
-                desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',
+                fullName: 'Aviya Malka',
+                desc: 'A member of HouseKey.',
                 organization: 'HouseKey',
-                email: 'tereza.s@housekey.com',
-                phone: '(214) 617-2614',
+                email: 'aviya6168257@gmail.com',
+                phone: '058-7474641',
                 social: {
-                    facebook: '',
-                    twitter: '',
-                    linkedin: '',
-                    instagram: '',
+                    //facebook: '',
+                    //twitter: '',
+                    //linkedin: '',
+                    //instagram: '',
                     website: 'https://tereza.stiles.com'
                 },
                 ratingsCount: 4,
                 ratingsValue: 380,
-                image: 'assets/images/agents/a-3.jpg'
+                image: 'assets/images/agents/aviya.jpg'
             },
             {
                 id: 4,
-                fullName: 'Michael Blair',
-                desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',
+                fullName: 'Tehila Rashkes',
+                desc: 'A member of HouseKey.',
                 organization: 'HouseKey',
-                email: 'michael.b@housekey.com',
-                phone: '(267) 388-1637',
+                email: 'tehila.rashkes@gmail.com',
+                phone: '054-5856054',
                 social: {
-                    facebook: '',
-                    twitter: '',
-                    linkedin: '',
-                    instagram: '',
+                    //facebook: '',
+                    //twitter: '',
+                    //linkedin: '',
+                    //instagram: '',
                     website: 'https://michael.blair.com'
                 },
-                ratingsCount: 6,
+                ratingsCount: 4,
                 ratingsValue: 480,
-                image: 'assets/images/agents/a-4.jpg'
+                image: 'assets/images/agents/tehila.jpg'
             },
             {
                 id: 5,
-                fullName: 'Michelle Ormond',
-                desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',
+                fullName: 'Hadar Bruchim',
+                desc: 'A member of HouseKey.',
                 organization: 'HouseKey',
-                email: 'michelle.o@housekey.com',
-                phone: '(267) 388-1637',
+                email: 'hadarb97@gmail.com',
+                phone: '053-3367444',
                 social: {
-                    facebook: '',
-                    twitter: '',
-                    linkedin: '',
-                    instagram: '',
+                    //facebook: '',
+                    //twitter: '',
+                    //linkedin: '',
+                    //instagram: '',
                     website: 'https://michelle.ormond.com'
                 },
                 ratingsCount: 6,
                 ratingsValue: 480,
-                image: 'assets/images/agents/a-5.jpg'
+                image: 'assets/images/agents/hadar.jpg'
             }
         ];
     }
