@@ -42,6 +42,7 @@ export class AppService {
     }
 
     public getAirbnbPropertiesByParams(propertyType: string, bedrooms: number) {
+        var request = { propertyType: propertyType, bedrooms: bedrooms };
         return this.webReqService.get(`getAirbnbPropertiesByParams/${propertyType}/${bedrooms}`);
     }
 
@@ -156,18 +157,58 @@ export class AppService {
 
     public getNeighborhoods() {
         return [
-            { id: 1, name: 'Astoria', cityId: 1 },
-            { id: 2, name: 'Midtown', cityId: 1 },
-            { id: 3, name: 'Chinatown', cityId: 1 },
-            { id: 4, name: 'Austin', cityId: 2 },
-            { id: 5, name: 'Englewood', cityId: 2 },
-            { id: 6, name: 'Riverdale', cityId: 2 },
-            { id: 7, name: 'Hollywood', cityId: 3 },
-            { id: 8, name: 'Sherman Oaks', cityId: 3 },
-            { id: 9, name: 'Highland Park', cityId: 3 },
-            { id: 10, name: 'Belltown', cityId: 4 },
-            { id: 11, name: 'Queen Anne', cityId: 4 },
-            { id: 12, name: 'Green Lake', cityId: 4 }
+            { id: 1, name: 'Mitte' },
+            { id: 2, name: 'Prenzlauer Berg' },
+            { id: 3, name: 'Schoneberg' },
+            { id: 4, name: 'Friedrichshain' },
+            { id: 5, name: 'Kreuzberg' },
+            { id: 6, name: 'Neukolln' },
+            { id: 7, name: 'Moabit' },
+            { id: 8, name: 'Charlottenburg' },
+            { id: 9, name: 'Alt-Treptow' },
+            { id: 10, name: 'Lichterfelde' },
+            { id: 11, name: 'Schmockwitz' },
+            { id: 12, name: 'Schmargendorf' },
+            { id: 13, name: 'Niederschonhausen' },
+            { id: 14, name: 'Friedrichshagen' },
+            { id: 15, name: 'Wilmersdorf' },
+            { id: 16, name: 'Heinersdorf' },
+            { id: 17, name: 'Rummelsburg' },
+            { id: 18, name: 'Friedenau' },
+            { id: 19, name: 'Wedding' },
+            { id: 20, name: 'Reinickendorf' },
+            { id: 21, name: 'Pankow' },
+            { id: 22, name: 'Tegel' },
+            { id: 23, name: 'Buckow' },
+            { id: 24, name: 'Karlshorst' },
+            { id: 25, name: 'Lichtenberg' },
+            { id: 26, name: 'Zehlendorf' },
+            { id: 27, name: 'Tiergarten' },
+            { id: 28, name: 'Rudow' },
+            { id: 29, name: 'Altglienicke' },
+            { id: 30, name: 'Hansaviertel' },
+            { id: 31, name: 'Lichtenrade' },
+            { id: 32, name: 'Westend' },
+            { id: 33, name: 'Mahlsdorf' },
+            { id: 34, name: 'Potsdamer Platz' },
+            { id: 35, name: 'Biesdorf' },
+            { id: 36, name: 'Wannsee' },
+            { id: 37, name: 'Jhoannisthai' },
+            { id: 38, name: 'Konradshohe' },
+            { id: 39, name: 'Marienfelde' },
+            { id: 40, name: 'Wilhelmstadt' },
+            { id: 41, name: 'Baumschulenweg' },
+            { id: 42, name: 'Halensee' },
+            { id: 43, name: 'Steglitz' },
+            { id: 44, name: 'Frohnau' },
+
+            { id: 45, name: 'Nikolassee' },
+            { id: 46, name: 'Karow' },
+            { id: 47, name: 'Wittenau' },
+            { id: 48, name: 'Tempelhof' },
+            { id: 49, name: 'Rahnsdorf' },
+
+
         ]
     }
 
