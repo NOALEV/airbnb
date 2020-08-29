@@ -283,6 +283,8 @@ app.get('/property/:_userId/:propertyId', (req, res) => {
 })
 
 app.get('/getAirbnbPropertiesByParams/:propertyType/:bedrooms', (req, res) => {
+    console.log(req.params.bedrooms);
+    console.log(req.params.propertyType);
         
     AirbnbProperty.find({
         bedrooms: req.params.bedrooms,
