@@ -57,6 +57,19 @@
                               <mat-error *ngIf="submitForm.get('basic')['controls'].propertyType.errors?.required">Property Type is required</mat-error>
                           </mat-form-field>
                       </div>
+                      
+                      <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Room Type</mat-label>
+                            <mat-select placeholder="Select Room Type" formControlName="roomType" required>
+                                <mat-option *ngFor="let roomType of roomTypes" [value]="roomType">
+                                    {{roomType.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="submitForm.get('basic')['controls'].roomType.errors?.required">roomType Type is required</mat-error>
+                        </mat-form-field>
+                    </div>
+
 
                       <!-- <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
         <mat-form-field appearance="outline" class="w-100">

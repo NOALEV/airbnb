@@ -24,6 +24,8 @@ export class SubmitPropertyComponent implements OnInit {
   public features = [];
   public propertyTypes = [];
   public bedTypes = [];
+  public roomTypes = [];
+
   public cancellationPolicyes = [];
   public propertyStatuses = [];
   public cities = [];
@@ -50,6 +52,7 @@ export class SubmitPropertyComponent implements OnInit {
     this.cancellationPolicyes = this.appService.getcancellationPolicy();
     this.propertyStatuses = this.appService.getPropertyStatuses();
     this.neighborhoods=this.appService.getNeighborhoods();
+    this.roomTypes=this.appService.getRoomTypes();
       
 
     this.submitForm = this.fb.group({
@@ -58,6 +61,8 @@ export class SubmitPropertyComponent implements OnInit {
         desc: null,
         cancellationPolicy: '',
         propertyType: [null, Validators.required],
+        roomType: [null, Validators.required],
+
         gallery: null
       }),
       address: this.fb.group({

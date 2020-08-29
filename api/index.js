@@ -327,6 +327,8 @@ app.post('/property',  (req, res) => {
     newProperty.title=body.basic.title;
     newProperty.desc=body.basic.desc;
     newProperty.propertyType=body.basic.propertyType.name;
+    newProperty.roomType=body.basic.roomType.name;
+
     newProperty.cancellationPolicy=body.basic.cancellationPolicy.name;
     newProperty.location=body.address.location;
     newProperty.city=body.address && body.address.city ? body.address.city.name:'';
