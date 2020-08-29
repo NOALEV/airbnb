@@ -105,6 +105,8 @@ export class AppService {
             { id: 2, name: 'Pull-out Sofa' },
             { id: 3, name: 'Couch' },
             { id: 4, name: 'Futon' },
+            { id: 5, name: 'Airbed ' },
+
 
         ]
     }
