@@ -120,17 +120,10 @@ export class AppService {
     }
     public getPropertyTypes() {
         return [
-            { id: 1, name: 'Loft' },
+            { id: 1, name: 'Entire home/apt' },
             { id: 2, name: 'Guesthouse' },
-            { id: 3, name: 'Apartment' },
-            { id: 4, name: 'Condominium' },
-            { id: 5, name: 'House' },
-            { id: 6, name: 'Serviced apartment' },
-            { id: 7, name: 'Townhouse' },
-            { id: 8, name: 'Boutique hotel' },
-            { id: 9, name: 'Bed and breakfast' },
-            { id: 10, name: 'Cabin' },
-            { id: 11, name: 'Bungalow' },
+            { id: 3, name: 'Shared room' },
+          
 
         ]
     }
