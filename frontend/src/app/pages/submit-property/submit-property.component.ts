@@ -49,6 +49,7 @@ export class SubmitPropertyComponent implements OnInit {
     this.bedTypes = this.appService.getBedTypes();
     this.cancellationPolicyes = this.appService.getcancellationPolicy();
     this.propertyStatuses = this.appService.getPropertyStatuses();
+    this.neighborhoods=this.appService.getNeighborhoods();
       
 
     this.submitForm = this.fb.group({
@@ -63,7 +64,7 @@ export class SubmitPropertyComponent implements OnInit {
         location: ['', Validators.required],
         city: ['', Validators.required],
         zipCode: '',
-        neighborhood: '',
+        neighborhood: ['', Validators.required],
         street: '',
         lat: '',
         lng:''

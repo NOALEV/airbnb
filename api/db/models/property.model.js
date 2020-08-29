@@ -57,6 +57,10 @@ const PropertySchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    neighborhood: {
+        type: String,
+        required: false,
+    },
   
     street:{
         type: String,
