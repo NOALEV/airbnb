@@ -2,7 +2,7 @@ import { Menu } from './menu.model';
 
 export const horizontalMenuItems = [ 
     new Menu (1, 'Home', '/', null, null, false, 0),
-    new Menu (2, 'Properties', '/properties', null, null, false, 0), 
+   // new Menu (2, 'Properties', '/properties', null, null, false, 0), 
    // new Menu (40, 'Pages', null, null, null, true, 0),
     new Menu (41, 'Agents', '/agents', null, null, false, 40), 
     new Menu (42, 'Agent', '/agents/1', null, null, false, 40),
