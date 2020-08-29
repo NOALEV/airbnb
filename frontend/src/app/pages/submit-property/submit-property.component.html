@@ -383,24 +383,32 @@
                   <div fxLayout="row" fxLayoutAlign="center center" class="pt-3">
                       <button mat-raised-button color="accent" [routerLink]="['/account/my-properties']" (click)="reset()" type="button">Your properties</button>
                   </div>
+                  
                   <div class="pt-5 pb-5" *ngIf="chartsSettings != null">
+                      <!---
                       <h2 class="mt-3 uppercase text-center">Similar properties prices</h2>
+                  -->
                       <!--<div class="d-flex">
                           <h4>Choose chartr type</h4>
                           <mat-radio-group [(ngModel)]="chartsSettings.chartType">
                               <mat-radio-button *ngFor="let chartType of chartRadios" [value]="chartType">toolbar-{{chartType}}</mat-radio-button>
                           </mat-radio-group>
                       </div>-->
+                      <!--
                       <chart [chartType]="chartsSettings.chartType"
                              [datasets]="chartsSettings.datasets"
                              [labels]="chartsSettings.labels"
                              [isShowLegend]="chartsSettings.isShowLegend"></chart>
+                             -->
                   </div>
                   <div class="pt-5">
+                      <!--
                       <h2 class="mt-3 uppercase text-center">Similar properties</h2>
                       <app-properties-carousel [properties]="airbnbProperties"></app-properties-carousel>
+                     -->
                   </div>
               </div> 
+            -->
           </mat-step>
 
       </mat-horizontal-stepper>
