@@ -99,7 +99,8 @@ export class LoginComponent implements OnInit {
          var authUser ={
           username:profile.getEmail(), 
           password:profile.getId(),
-          rememberMe:false
+          rememberMe:false,
+
          }
          this.onLoginFormSubmit(authUser,true);
         
