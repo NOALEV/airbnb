@@ -42,8 +42,11 @@ export class AppService {
     }
 
     public getAirbnbPropertiesByParams(propertyType: string, bedrooms: number) {
-        var request = { propertyType: propertyType, bedrooms: bedrooms };
         return this.webReqService.get(`getAirbnbPropertiesByParams/${propertyType}/${bedrooms}`);
+    }
+
+    public getAirbnbPropertiesByNeighbourhood(neighbourhood: string) {
+        return this.webReqService.get(`getAirbnbPropertiesByNeighbourhood/${neighbourhood}`);
     }
 
     public getFeaturedProperties(): Observable<Property[]> {
