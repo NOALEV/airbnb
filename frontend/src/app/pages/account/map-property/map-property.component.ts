@@ -12,8 +12,10 @@ export class MapPropertyComponent implements OnInit {
 
   public lat: number = 40.678178;
   public lng: number = -73.944158;
-  public zoom: number = 12;  
+  public zoom: number = 16;  
   public title: string = "";
+  public markers = [];
+
   
   constructor(public appService:AppService, private propertyService: PropertyService, private activatedRoute:ActivatedRoute) { }
 
@@ -23,17 +25,31 @@ export class MapPropertyComponent implements OnInit {
     })
   }
   
+  
+
   public getPropertyById(propertyId){
     var _userId=this.propertyService.getUserId();
     this.appService.getPropertyById(_userId,propertyId).subscribe(data=> {
-      this.title = data["title"];
-      const location = data["location"]; 
-      this.appService.getLatLng(location).subscribe(data => {
-        console.log(data["results"][0]["geometry"]["location"]);
-        const loc = data["results"][0]["geometry"]["location"];
-        this.lat = loc.lat;
-        this.lng = loc.lng;
-      });
+      this.setAirbnbProperties(data);
     }); 
   }
+
+  public setAirbnbProperties(value: any) {
+    this.appService.getAirbnbPropertiesByNeighbourhood(value.neighborhood).subscribe(data => {
+    this.title = `Properties in ${value.neighborhood}`;
+    this.lat = data[0].latitude; 
+    this.lng = data[0].longitude;
+    this.markers = (<any[]>data).map((item) => { 
+      return {"lat": item.latitude, "lng":item.longitude}
+    });
+        
+    });
+  
+  }
+
+
+
+
+
+
 }
