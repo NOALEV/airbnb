@@ -48,7 +48,7 @@ export const routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    //InputFileModule,
+    InputFileModule,
     SharedModule,
     AgmCoreModule
   ]
