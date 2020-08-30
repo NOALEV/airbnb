@@ -14,6 +14,8 @@ import { MyPropertiesComponent } from './my-properties/my-properties.component';
 import { MapPropertyComponent } from './map-property/map-property.component';
 import { GraphPropertyComponent } from './graph-property/graph-property.component';
 import { SimilarPropertiesComponent } from './similar-properties/similar-properties.component';
+import { AllPropertiesComponent } from '../neighbourhood/all-properties/all-properties.component'
+
 
 export const routes = [
   { 
@@ -38,14 +40,17 @@ export const routes = [
     MyPropertiesComponent, 
     FavoritesComponent, 
     ProfileComponent, 
-    EditPropertyComponent, GraphPropertyComponent, SimilarPropertiesComponent
+    EditPropertyComponent, 
+    GraphPropertyComponent, 
+    SimilarPropertiesComponent,
+    MapPropertyComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    InputFileModule,
-    AgmCoreModule,
-    SharedModule
+    //InputFileModule,
+    SharedModule,
+    AgmCoreModule
   ]
 })
 export class AccountModule { }
