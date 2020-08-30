@@ -6,7 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterStreetsPipe implements PipeTransform {
   transform(items:Array<any>, filter: any) {  
     let neighborhoodIds = [];    
+    console.log(filter.neighborhoods);
     if(filter.neighborhoods){
+      if(!filter.neighborhoods.length) {
+        filter.neighborhoods = [filter.neighborhoods];  
+      }
       filter.neighborhoods.forEach(neighborhood => {
         neighborhoodIds.push(neighborhood.id);
       }); 

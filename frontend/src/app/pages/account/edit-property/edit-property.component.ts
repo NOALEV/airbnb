@@ -103,6 +103,7 @@ export class EditPropertyComponent implements OnInit {
       this.submitForm.controls.basic.get('title').setValue(data["title"]);
       this.submitForm.controls.basic.get('desc').setValue(data["desc"]);
       this.submitForm.controls.basic.get('propertyType').setValue( this.propertyTypes.filter(p => p.name == data["propertyType"])[0]);
+      this.submitForm.controls.address.get('neighborhood').setValue( this.neighborhoods.filter(p => p.name == data["neighborhood"])[0]);
       this.submitForm.controls.basic.get('cancellationPolicy').setValue( this.cancellationPolicyes.filter(p => p.name == data["cancellationPolicy"])[0]);
 
 
@@ -348,7 +349,7 @@ export class EditPropertyComponent implements OnInit {
     this.step = index;
   }
   onSubmitForm(form){
-console.log();
+    console.log();
     if(this.submitForm.get(form).valid){
       this.nextStep();
       if(form == "Additional"){
@@ -365,7 +366,7 @@ console.log();
   onProperryFormSubmit(values:Object):void
   {
    if (this.submitForm.valid) {
-      this.propertyService.updateProperty(this.currentPropertyId,values).subscribe((res: HttpResponse<any>) => {
+     this.propertyService.updateProperty(this.currentPropertyId,values).subscribe((res: HttpResponse<any>) => {
 
       });
 
