@@ -1,5 +1,6 @@
 <mat-toolbar id="top-toolbar" class="top-toolbar">
   <div class="theme-container" fxLayout="row" fxLayoutAlign="space-between center">
+    <!-- weather widget start --><a target="_blank" href="https://www.booked.net/weather/berlin-18056"><img src="https://w.bookcdn.com/weather/picture/13_18056_1_1_F8F8FF_158_fff5d9_333333_08488D_3_fff5d9_333333_0_6.png?scode=124&domid=w209&anc_id=4316"  alt="booked.net"/></a><!-- weather widget end -->
     <div fxLayout="row" fxLayoutAlign="start center">
       <span fxHide="false" fxHide.gt-sm>
         <button mat-button (click)="sidenavToggle()">
@@ -22,6 +23,7 @@
         <app-horizontal-menu [menuParentId]="0"></app-horizontal-menu>
     </div> 
     <div fxLayout="row" fxLayoutAlign="start center">
+    
       <!--
       <a routerLink="/account/favorites" mat-icon-button matTooltip="Favorites" fxShow="false" fxShow.gt-md>
           <mat-icon [matBadge]="appService.Data.favorites.length" 
