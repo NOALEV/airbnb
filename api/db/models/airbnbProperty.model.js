@@ -46,6 +46,13 @@ const PropertySchema = new mongoose.Schema({
     },
     neighbourhood:{
         type: String    
+    },
+    latitude:{
+        type: Number    
+      },
+    
+    longitude:{
+      type: Number    
     }
 })
 
