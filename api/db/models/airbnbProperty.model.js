@@ -44,6 +44,9 @@ const PropertySchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    neighbourhood:{
+        type: String    
+    }
 })
 
 const AirbnbProperty = mongoose.model('AirbnbProperty', PropertySchema, 'airbnbProperty');
