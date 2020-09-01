@@ -48,6 +48,9 @@ export class AppService {
     public getAirbnbPropertiesByNeighbourhood(neighbourhood: string) {
         return this.webReqService.get(`getAirbnbPropertiesByNeighbourhood/${neighbourhood}`);
     }
+    public getAirbnbPropertiesByLatAndLng(lat: number,lng:number) {
+        return this.webReqService.get(`getAirbnbPropertiesByLatAndLng/${lat}/${lng}`);
+    }
 
     public getFeaturedProperties(): Observable<Property[]> {
         return this.http.get<Property[]>(this.url + 'featured-properties.json');

@@ -2,8 +2,10 @@
   <h1 class="fw-500 text-center">{{title}}</h1>
 </div>
 
-<agm-map  [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeControl]="true" [fullscreenControl]="true" (mapClick)="onMapClick($event)">
-  <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true" (markerClick)="onMarkerClick($event)"></agm-marker>
+<agm-map *ngIf="myProperty" [latitude]="myProperty.lat" [longitude]="myProperty.lng" [zoom]="zoom" [mapTypeControl]="true" [fullscreenControl]="true" (mapClick)="onMapClick($event)">
+  <agm-marker *ngIf="myProperty"  [iconUrl]="image" [latitude]="myProperty.lat" [longitude]="myProperty.lng" [markerDraggable]="true" (markerClick)="onMarkerClick($event)"></agm-marker>
+  <agm-marker  *ngFor="let marker of markers"  [title]="marker.name" [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true" (markerClick)="openWindow(marker)"></agm-marker>
+
 </agm-map>
 
 <!--

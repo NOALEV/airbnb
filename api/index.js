@@ -283,9 +283,7 @@ app.get('/property/:_userId/:propertyId', (req, res) => {
 })
 
 app.get('/getAirbnbPropertiesByParams/:propertyType/:bedrooms', (req, res) => {
-    console.log(req.params.bedrooms);
-    console.log(req.params.propertyType);
-        
+    
     AirbnbProperty.find({
         bedrooms: req.params.bedrooms,
         property_type: req.params.propertyType,
@@ -307,11 +305,22 @@ app.get('/getAirbnbPropertiesByNeighbourhood/:neighbourhood', (req, res) => {
         
     AirbnbProperty.find({
         neighbourhood: req.params.neighbourhood,
-        weekly_price: { "$nin": [null, ""] },
-        monthly_price: { "$nin": [null, ""] },
-        price: { "$nin": [null, ""] }
+      
            
     }).limit(500).then((properties) => {
+            console.log(properties.length);
+            res.send(properties);
+        }).catch((e) => {
+            res.send(e);
+        });
+})
+app.get('/getAirbnbPropertiesByLatAndLng/:lat/:lng', (req, res) => {
+    var lat =parseFloat(req.params.lat);
+    var lng= parseFloat(req.params.lng);
+
+    AirbnbProperty.find(
+                
+    ).limit(2000).then((properties) => {
             console.log(properties.length);
             res.send(properties);
         }).catch((e) => {

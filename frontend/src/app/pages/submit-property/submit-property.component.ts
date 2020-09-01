@@ -66,10 +66,10 @@ export class SubmitPropertyComponent implements OnInit {
         gallery: null
       }),
       address: this.fb.group({
-        location: ['', Validators.required],
-        city: ['', Validators.required],
+        location: '',
+        city: '',
         zipCode: '',
-        neighborhood: ['', Validators.required],
+        neighborhood: '',
         street: '',
         lat: '',
         lng:''
@@ -90,7 +90,7 @@ export class SubmitPropertyComponent implements OnInit {
 
 
   public onSelectionChange(e:any){ 
-    if(e.selectedIndex == 4){   
+    if(e.selectedIndex == 3){   
       this.horizontalStepper._steps.forEach(step => step.editable = false);
     }
   }

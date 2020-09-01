@@ -106,40 +106,10 @@
             </agm-map>
         </div>
       
-        <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
-          <mat-form-field appearance="outline" class="w-100">
-              <mat-label>City</mat-label>
-              <mat-select placeholder="Select City..." formControlName="city" (selectionChange)="onSelectCity()" required> 
-                <mat-option *ngFor="let city of cities" [value]="city">
-                  {{city.name}}
-                </mat-option>
-              </mat-select> 
-              <mat-error *ngIf="submitForm.get('address')['controls'].city.errors?.required">City is required</mat-error>                    
-          </mat-form-field>
-        </div> 
       
-        <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Street</mat-label>
-            <mat-select placeholder="Select Street..." formControlName="street" multiple> 
-              <mat-option *ngFor="let street of streets | filterStreets : { neighborhoods: submitForm.get('address')['controls'].neighborhood.value?.id, cityId:submitForm.get('address')['controls'].city.value?.id } " [value]="street">
-                {{street.name}}
-              </mat-option>
-            </mat-select>  
-          </mat-form-field>
-        </div> 
+        
       
-        <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
-          <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Neighborhood</mat-label>
-              <mat-select placeholder="Select Neighborhood" formControlName="neighborhood" required>
-                  <mat-option *ngFor="let neighborhood of neighborhoods" [value]="neighborhood">
-                      {{neighborhood.name}}
-                  </mat-option>
-              </mat-select>
-              <mat-error *ngIf="submitForm.get('address')['controls'].neighborhood.errors?.required">Neighborhood is required</mat-error>
-          </mat-form-field>
-      </div>
+     
         <div fxFlex="100" class="mt-3 p-2" fxLayoutAlign="space-between center">
           <button mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="prevStep()" type="button">
             <mat-icon>navigate_before</mat-icon>
