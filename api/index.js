@@ -6,7 +6,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-
+const { spawn } = require('child_process')
 
 
 const { mongoose } = require('./db/mongoose');
@@ -497,8 +497,9 @@ app.get('/predict/:propertyId/:_userId', (req, res) => {
        _id: req.params.propertyId,
    }).then((property) => {
        /* Run prediction model */
+       
        var predict_process =
-           spawn('C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Anaconda3_64\\python.exe', ['C:\\Users\\aviya\\untitled0.py']);
+          spawn("python", ['algorithem/untitled0.py']);
 
 
        /* TODO Edit this to read features from property */
@@ -540,24 +541,32 @@ app.get('/predict/:propertyId/:_userId', (req, res) => {
              property.bedType=='Futon'?1:0,
              property.bedType=='Pull-out Sofa'?1:0,
              property.bedType=='Real Bed'?1:0,
-             property.cancellationPolicy='flexible'?1:0,
-             property.cancellationPolicy='moderate'?1:0,
-             property.cancellationPolicy='14 Days'?1:0,
-             property.cancellationPolicy='30 Days'?1:0,
-             property.cancellationPolicy='60 Days'?1:0,
+             property.cancellationPolicy =='flexible'?1:0,
+             property.cancellationPolicy =='moderate'?1:0,
+             property.cancellationPolicy =='14 Days'?1:0,
+             property.cancellationPolicy =='30 Days'?1:0,
+             property.cancellationPolicy =='60 Days'?1:0,
 
               ]
        ];
+       
 
        /* Send the predictioni as a response */
        predict_process.stdout.on('data', function (data) {
+        var body ={'amount':JSON.parse(data.toString())[0]}
+        res.status(200).send(body);
            res.send(JSON.parse(data.toString())[0]);
        });
        
+       predict_process.stderr.on('data', function (data) {
+        console.log("err:" + data )
+    });
        /* Send inputs to process */
+       console.log(JSON.stringify(input_array));
        predict_process.stdin.write(JSON.stringify(input_array));
        predict_process.stdin.end();
    }).catch((e) => {
+       console.log(e);
       res.send(e);
        
    });
