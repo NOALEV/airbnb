@@ -1,5 +1,6 @@
 export class Property {
     constructor(public _id: string,
+        public _userId: string,
         public title: string,
         public desc: string,
         public propertyType: string,

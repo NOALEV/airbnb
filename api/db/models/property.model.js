@@ -86,9 +86,13 @@ const PropertySchema = new mongoose.Schema({
         type:Number,
         required:false,
     },
-    airConditioning:{
+    coffeeMaker:{
         type:Boolean,
         required:false,
+    },
+    dishWasher:{
+        type:Boolean,
+        required:false, 
     },
     dryer:{
         type:Boolean,
@@ -102,6 +106,12 @@ const PropertySchema = new mongoose.Schema({
         type:Boolean,
         required:false, 
     },
+    hairDryer:
+    {
+        type:Boolean,
+        required:false, 
+    },
+
     tv:{
         type:Boolean,
         required:false, 
@@ -110,59 +120,76 @@ const PropertySchema = new mongoose.Schema({
         type:Boolean,
         required:false, 
     },
-    SuitableForFamilies :{
+    suitableForFamilies :{
         type:Boolean,
         required:false, 
     },
-    Shampoo :{
+    linen:{
         type:Boolean,
         required:false, 
     },
-    StoveTop :{
+
+    shampoo :{
         type:Boolean,
         required:false, 
     },
-    Hangers :{
+    stoveTop :{
+        type:Boolean,
+        required:false, 
+    },
+    hangers :{
         type:Boolean,
         required:false, 
       },
-    HotWater :{
+    hotWater :{
         type:Boolean,
         required:false, 
     },
-    ComfortableWorkplaceForLaptop :{
+    comfortableWorkplaceForLaptop :{
         type:Boolean,
         required:false, 
     },
-    kitchenUtensils :{
+    dishesAndSilverware :{
         type:Boolean,
         required:false, 
     },
-    Terrace :{
+    patioOrBalcony :{
         type:Boolean,
         required:false, 
     },
-    Linen :{
+    oven :{
         type:Boolean,
         required:false, 
     },
-    Parking :{
+    bathTub:{
+        type:Boolean,
+        required:false,
+    },
+    washer:{
         type:Boolean,
         required:false, 
     },
-    Elevators :{
+    cookingBasics :{
         type:Boolean,
         required:false, 
     },
-    Iron :{
+    parking :{
         type:Boolean,
         required:false, 
     },
-    Heating :{
+    elevators :{
         type:Boolean,
         required:false, 
     },
-    Kitchen :{
+    iron :{
+        type:Boolean,
+        required:false, 
+    },
+    heating :{
+        type:Boolean,
+        required:false, 
+    },
+    kitchen :{
         type:Boolean,
         required:false, 
     },

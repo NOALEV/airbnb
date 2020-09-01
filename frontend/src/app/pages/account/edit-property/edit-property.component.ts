@@ -124,26 +124,33 @@ export class EditPropertyComponent implements OnInit {
       this.submitForm.controls.additional.get('bathrooms').setValue(data["bathrooms"]);  
       this.submitForm.controls.additional.get('bedType').setValue( this.bedTypes.filter(p => p.name == data["bedType"])[0]);
       this.submitForm.controls.additional.get('accommodates').setValue(data["accommodates"]);
-      this.features[0].selected=data["airConditioning"];
+      this.features[0].selected=data["coffeeMaker"];
       this.features[1].selected=data["dryer"];
       this.features[2].selected=data["microwave"];
        this.features[3].selected=data["refrigerator"];
       this.features[4].selected=data["tv"];
        this.features[5].selected=data["wifi"];
-      this.features[6].selected=data["SuitableForFamilies"];
-      this.features[7].selected=data["Kitchen"];
-      this.features[8].selected=data["Heating"];
-      this.features[9].selected=data["Iron"];
-      this.features[10].selected=data["Elevators"];
-      this.features[11].selected=data["Parking"];
-      this.features[12].selected=data["Linen"];
-      this.features[13].selected=data["Terrace"];
-      this.features[14].selected=data["kitchenUtensils"];
+      this.features[6].selected=data["suitableForFamilies"];
+      this.features[7].selected=data["kitchen"];
+      this.features[8].selected=data["heating"];
+      this.features[9].selected=data["iron"];
+      this.features[10].selected=data["elevators"];
+      this.features[11].selected=data["parking"];
+      this.features[12].selected=data["cookingBasics"];
+      this.features[13].selected=data["patioOrBalcony"];
+      this.features[14].selected=data["dishesAndSilverware"];
       this.features[15].selected=data["ComfortableWorkplaceForLaptop"];
-      this.features[16].selected=data["HotWater"];
-      this.features[17].selected=data["Hangers"];
-      this.features[18].selected=data["StoveTop"];
-      this.features[19].selected=data["Shampoo"];
+      this.features[16].selected=data["hotWater"];
+      this.features[17].selected=data["hangers"];
+      this.features[18].selected=data["stoveTop"];
+      this.features[19].selected=data["shampoo"];
+      this.features[20].selected=data["hairDrayer"];
+      this.features[21].selected=data["oven"];
+      this.features[22].selected=data["washer"];
+      this.features[23].selected=data["dishWasher"];
+      this.features[24].selected=data["bathTub"];
+      this.features[25].selected=data["linen"];
+
       this.submitForm.controls.additional.get('features').setValue(this.features);
 
       this.submitForm.controls.address.get('zipCode').setValue(data["zipCode"]);  
@@ -371,6 +378,7 @@ export class EditPropertyComponent implements OnInit {
       });
 
     }
+  
   
 }
   nextStep() {

@@ -64,12 +64,11 @@
             <div class="sticky-footer-helper" fxFlex="grow"></div>
             <mat-card-actions class="m-0 p-0" fxLayoutAlign="space-between center"> 
                 
-                <div *ngIf="!property.fromKaggle" >
-                    
-                    <a [routerLink]="['/properties', property.id]" mat-stroked-button color="primary" class="uppercase">Prediction</a>
-                </div> 
+                <button *ngIf="!property.fromKaggle"  mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="predictionButton()">Prediction
+                  </button>
             </mat-card-actions> 
-        </div>        
+        </div>    
+            
         
     </div> 
 

@@ -126,7 +126,7 @@ export class AppService {
     public getRoomTypes() {
         return [
             { id: 1, name: 'Entire home/apt' },
-            { id: 2, name: 'Guesthouse' },
+            { id: 2, name: 'Private room ' },
             { id: 3, name: 'Shared room' },
           
 
@@ -259,7 +259,7 @@ export class AppService {
 
     public getFeatures() {
         return [
-            { id: 1, name: 'Air Conditioning', selected: false },
+            { id: 1, name: 'Coffee maker ', selected: false },
             { id: 2, name: 'Dryer', selected: false },
             { id: 3, name: 'Microwave', selected: false },
             { id: 4, name: 'Refrigerator', selected: false },
@@ -271,15 +271,20 @@ export class AppService {
             { id: 10, name: 'Iron', selected: false },
             { id: 11, name: 'Elevators', selected: false },
             { id: 12, name: 'Parking', selected: false },
-            { id: 13, name: 'Linen', selected: false },
-            { id: 14, name: 'Terrace', selected: false },
-            { id: 15, name: 'kitchen utensils', selected: false },
+            { id: 13, name: 'Cooking basics', selected: false },
+            { id: 14, name: 'Patio or balcony', selected: false },
+            { id: 15, name: 'kitchen dishes and silverware', selected: false },
             { id: 16, name: 'Comfortable workplace for laptop', selected: false },
             { id: 17, name: ' Hot water', selected: false },
             { id: 18, name: ' Hangers', selected: false },
             { id: 19, name: ' Stove top', selected: false },
             { id: 20, name: ' Shampoo', selected: false },
-
+            { id: 21, name: ' Hair drayer', selected: false },
+            { id: 22, name: ' Oven', selected: false },
+            { id: 23, name: ' Washer', selected: false },
+            { id: 24, name: ' Dish washer', selected: false },
+            { id: 25, name: 'Bath tub', selected: false },
+            { id: 26, name: 'Linen', selected: false },
 
 
 

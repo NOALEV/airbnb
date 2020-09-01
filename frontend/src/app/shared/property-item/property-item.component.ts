@@ -5,6 +5,8 @@ import { Settings, AppSettings } from '../../app.settings';
 
 import { AppService } from '../../app.service'; 
 import { CompareOverviewComponent } from '../compare-overview/compare-overview.component'; 
+import { PropertyService } from 'src/app/property.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-property-item',
@@ -26,9 +28,13 @@ export class PropertyItemComponent implements OnInit {
     clickable: true
   };
   public settings: Settings;
-  constructor(public appSettings:AppSettings, public appService:AppService) {
+  constructor(public appSettings:AppSettings, public appService:AppService,              private propertyService: PropertyService,
+    ) {
     this.settings = this.appSettings.settings;
   }
+  public currentPropertyId: string;
+  
+
 
   ngOnInit() { }
 
@@ -117,7 +123,17 @@ export class PropertyItemComponent implements OnInit {
       effect: "slide"
     }
   }
+  predictionButton():void
+  {
+    
+     this.propertyService.prediction(this.property._id,this.property._userId).subscribe((res: HttpResponse<any>) => {
+
+      });
+
+    }
   
+  
+
 
   public addToCompare(){
     this.appService.addToCompare(this.property, CompareOverviewComponent, (this.settings.rtl) ? 'rtl':'ltr'); 

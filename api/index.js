@@ -360,26 +360,36 @@ app.post('/property',  (req, res) => {
     newProperty.bathrooms=body.additional.bathrooms;
     newProperty.bedType=body.additional.bedType.name;
     newProperty.accommodates=body.additional.accommodates;
-    newProperty.airConditioning=body.additional.features[0].selected;
+    newProperty.coffeeMaker=body.additional.features[0].selected;
     newProperty.dryer=body.additional.features[1].selected;
     newProperty.microwave=body.additional.features[2].selected;
     newProperty.refrigerator=body.additional.features[3].selected;
     newProperty.tv=body.additional.features[4].selected;
     newProperty.wifi=body.additional.features[5].selected;
-    newProperty.SuitableForFamilies=body.additional.features[6].selected;
-    newProperty.Kitchen=body.additional.features[7].selected;
-    newProperty.Heating=body.additional.features[8].selected;
-    newProperty.Iron=body.additional.features[9].selected;
-    newProperty.Elevators=body.additional.features[10].selected;
-    newProperty.Parking=body.additional.features[11].selected;
-    newProperty.Linen=body.additional.features[12].selected;
-    newProperty.Terrace=body.additional.features[13].selected;
+    newProperty.suitableForFamilies=body.additional.features[6].selected;
+    newProperty.kitchen=body.additional.features[7].selected;
+    newProperty.heating=body.additional.features[8].selected;
+    newProperty.iron=body.additional.features[9].selected;
+    newProperty.elevators=body.additional.features[10].selected;
+    newProperty.parking=body.additional.features[11].selected;
+    newProperty.Cookingbasics=body.additional.features[12].selected;
+    newProperty.patioOrBalcony=body.additional.features[13].selected;
     newProperty.kitchenUtensils=body.additional.features[14].selected;
-    newProperty.ComfortableWorkplaceForLaptop=body.additional.features[15].selected;
-    newProperty.HotWater=body.additional.features[16].selected;
-    newProperty.Hangers=body.additional.features[17].selected;
-    newProperty.StoveTop=body.additional.features[18].selected;
-    newProperty.Shampoo=body.additional.features[19].selected;
+    newProperty.comfortableWorkplaceForLaptop=body.additional.features[15].selected;
+    newProperty.hotWater=body.additional.features[16].selected;
+    newProperty.hangers=body.additional.features[17].selected;
+    newProperty.stoveTop=body.additional.features[18].selected;
+    newProperty.shampoo=body.additional.features[19].selected;
+    newProperty.hairDryer=body.additional.features[20].selected;
+    newProperty.oven=body.additional.features[21].selected;
+    newProperty.washer=body.additional.features[22].selected;
+    newProperty.dishWasher=body.additional.features[23].selected;
+    newProperty.bathTub=body.additional.features[24].selected;
+    newProperty.linen=body.additional.features[25].selected;
+
+
+
+
 
     newProperty._userId=body._userId;
     if(body.basic.gallery){
@@ -423,26 +433,34 @@ app.patch('/properties/:id', (req, res) => {
         property.bathrooms=body.additional.bathrooms;
         property.bedType=body.additional.bedType.name;
         property.accommodates=body.additional.accommodates;
-        property.airConditioning=body.additional.features[0].selected;
+        property.coffeeMaker=body.additional.features[0].selected;
         property.dryer=body.additional.features[1].selected;
         property.microwave=body.additional.features[2].selected;
         property.refrigerator=body.additional.features[3].selected;
         property.tv=body.additional.features[4].selected;
         property.wifi=body.additional.features[5].selected;
-        property.SuitableForFamilies=body.additional.features[6].selected;
-        property.Kitchen=body.additional.features[7].selected;
-        property.Heating=body.additional.features[8].selected;
-        property.Iron=body.additional.features[9].selected;
-        property.Elevators=body.additional.features[10].selected;
-        property.Parking=body.additional.features[11].selected;
-        property.Linen=body.additional.features[12].selected;
-        property.Terrace=body.additional.features[13].selected;
-        property.kitchenUtensils=body.additional.features[14].selected;
-        property.ComfortableWorkplaceForLaptop=body.additional.features[15].selected;
-        property.HotWater=body.additional.features[16].selected;
-        property.Hangers=body.additional.features[17].selected;
-        property.StoveTop=body.additional.features[18].selected;
-        property.Shampoo=body.additional.features[19].selected;
+        property.suitableForFamilies=body.additional.features[6].selected;
+        property.kitchen=body.additional.features[7].selected;
+        property.heating=body.additional.features[8].selected;
+        property.iron=body.additional.features[9].selected;
+        property.elevators=body.additional.features[10].selected;
+        property.parking=body.additional.features[11].selected;
+        property.cookingbasics=body.additional.features[12].selected;
+        property.patioOrBalcony=body.additional.features[13].selected;
+        property.dishesAndSilverware=body.additional.features[14].selected;
+        property.comfortableWorkplaceForLaptop=body.additional.features[15].selected;
+        property.hotWater=body.additional.features[16].selected;
+        property.hangers=body.additional.features[17].selected;
+        property.stoveTop=body.additional.features[18].selected;
+        property.shampoo=body.additional.features[19].selected;
+        property.hairDryer=body.additional.features[20].selected;
+        property.oven=body.additional.features[21].selected;
+        property.washer=body.additional.features[22].selected;
+        property.dishWasher=body.additional.features[23].selected;
+        property.bathTub=body.additional.features[24].selected;
+        property.linen=body.additional.features[25].selected;
+
+
         property.images=[];
         if(body.basic.gallery){
             for(i=0;i<body.basic.gallery.length;i++)
@@ -459,6 +477,88 @@ app.patch('/properties/:id', (req, res) => {
          })
     });
 });
+
+//* GET /predict
+//* Purpose: predict price for given property
+//*/
+app.get('/predict/:propertyId/:_userId', (req, res) => {
+   // We want to return an array of all the apartments that belong to the authenticated user 
+   Property.findOne({
+       _userId: req.params._userId,
+       _id: req.params.propertyId,
+   }).then((property) => {
+       /* Run prediction model */
+       var predict_process =
+           spawn('C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Anaconda3_64\\python.exe', ['C:\\Users\\aviya\\untitled0.py']);
+
+
+       /* TODO Edit this to read features from property */
+       var input_array = [
+           [property.accommodates, 
+            property.bedrooms,
+             property.bathrooms,
+             property.kitchen?1:0,
+             property.heating?1:0,
+             property.hairDryer?1:0,
+             property.comfortableWorkplaceForLaptop?1:0,
+             property.hangers?1:0,
+             property.iron?1:0,
+             property.shampoo?1:0,
+             property.hotWater?1:0,
+             property.suitableForFamilies?1:0,
+             property.refrigerator?1:0,
+             property.dishesAndSilverware?1:0,
+             property.elevators?1:0,
+             property.cookingBasics?1:0,
+             property.stoveTop?1:0,
+             property.oven?1:0,
+             property.washer?1:0,
+             property.dryer?1:0,
+             property.coffeeMaker?1:0,
+             property.dishWasher?1:0,
+             property.patioOrBalcony?1:0,
+             property.microwave?1:0,
+             property.parking?1:0,
+             property.bathTub?1:0,
+             property.wifi?1:0,
+             property.tv?1:0,
+             property.linen?1:0,
+             property.roomType=='Entire home/apt'?1:0,
+             property.roomType=='Private room'?1:0,
+             property.roomType=='Shared room'?1:0,
+             property.bedType=='Airbed'?1:0,
+             property.bedType=='Couch'?1:0,
+             property.bedType=='Futon'?1:0,
+             property.bedType=='Pull-out Sofa'?1:0,
+             property.bedType=='Real Bed'?1:0,
+             property.cancellationPolicy='flexible'?1:0,
+             property.cancellationPolicy='moderate'?1:0,
+             property.cancellationPolicy='14 Days'?1:0,
+             property.cancellationPolicy='30 Days'?1:0,
+             property.cancellationPolicy='60 Days'?1:0,
+
+              ]
+       ];
+
+       /* Send the predictioni as a response */
+       predict_process.stdout.on('data', function (data) {
+           res.send(JSON.parse(data.toString())[0]);
+       });
+       
+       /* Send inputs to process */
+       predict_process.stdin.write(JSON.stringify(input_array));
+       predict_process.stdin.end();
+   }).catch((e) => {
+      res.send(e);
+       
+   });
+})
+
+
+
+
+
+
 
 /**
  * DELETE /apartments/:id

@@ -24,6 +24,12 @@ export class PropertyService {
     return this.webReqService.post('property', { values });
   }
 
+  prediction(id: string,_userId:String) {
+  
+    // We want to send a web request to create a propery
+    return this.webReqService.get(`predict/${id}/${_userId}`);
+  }
+
   updateProperty(id: string, values: object) {
     // We want to send a web request to update a list
     return this.webReqService.patch(`properties/${id}`, { values });
