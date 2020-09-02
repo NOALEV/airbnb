@@ -1,4 +1,13 @@
 <div class="pt-5">
     <h2 class="mt-3 uppercase text-center">Similar properties</h2>
+               
+       
+        <mat-chip-list *ngIf="message" fxLayoutAlign="center center" [style.min-height.px]="200">
+            <mat-chip selected disableRipple="true" color="warn" class="uppercase ws-nowrap">
+                {{message}}
+            </mat-chip> 
+        </mat-chip-list> 
+        
+
     <app-properties-carousel [properties]="airbnbProperties"></app-properties-carousel>
 </div>

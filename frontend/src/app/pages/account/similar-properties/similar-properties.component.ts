@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SimilarPropertiesComponent implements OnInit {
 
   public airbnbProperties: Property[];
-  
+  public message:string; 
   constructor(public appService: AppService, private propertyService: PropertyService, private activatedRoute:ActivatedRoute) { }
   
   ngOnInit(): void {
@@ -37,6 +37,12 @@ export class SimilarPropertiesComponent implements OnInit {
         for (var entity of airbnbProperties) {
             this.airbnbProperties.push(this.convertAirbnbToPropertyObject(entity))
         }
+        if(this.airbnbProperties.length == 0){
+       
+         
+          this.message = 'No Results Found';
+          return false;
+        } 
     });
   }
  
