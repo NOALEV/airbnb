@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       email: ['', Validators.compose([Validators.required, emailValidator])],
-      password: ['', Validators.required],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       receiveNewsletter: false                            
     });
   }
@@ -31,10 +31,11 @@ export class RegisterComponent implements OnInit {
       console.log(values);
       this.authService.signup(values).subscribe((res: HttpResponse<any>) => {
         console.log(res);
+        this.router.navigate(['/']);
       this.snackBar.open('You registered successfully!', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
       });
     
-  
+      
       }
     }
   }

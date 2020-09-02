@@ -5,7 +5,10 @@ export class Property {
         public desc: string,
         public propertyType: string,
         public bedType: string,
-
+        public getPrediction:boolean,
+        public predictionUs:number,
+        public predictionEur:number,
+        public prediction:number,
         public preview: object[],
         public images: string[],
         public city: string,

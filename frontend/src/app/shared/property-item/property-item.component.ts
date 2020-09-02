@@ -28,6 +28,8 @@ export class PropertyItemComponent implements OnInit {
     clickable: true
   };
   public settings: Settings;
+  public currencies = ['USD', 'EUR'];
+  public currency;
   constructor(public appSettings:AppSettings, public appService:AppService,              private propertyService: PropertyService,
     ) {
     this.settings = this.appSettings.settings;
@@ -36,7 +38,9 @@ export class PropertyItemComponent implements OnInit {
   
 
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.currency =this.currencies[0];
+   }
 
   ngAfterViewInit(){
     this.initCarousel();
@@ -126,12 +130,44 @@ export class PropertyItemComponent implements OnInit {
   predictionButton():void
   {
     
-     this.propertyService.prediction(this.property._id,this.property._userId).subscribe((res: HttpResponse<any>) => {
+     this.propertyService.prediction(this.property._id,this.property._userId).subscribe((res:any) => {
+      this.currency =this.currencies[0];
+      this.property.getPrediction=true;
+      this.property.predictionUs=res.amount;
+      this.property.prediction=res.amount;
 
+      
       });
 
     }
+    
+    public changeCurrency(currency){
+      
+      var from =this.currency;
+      var to= currency;
+
+      if(to=="USD" && this.property.predictionUs){
+        this.property.prediction =this.property.predictionUs;
+        this.currency = currency;
+      }else if(to=="EUR" ){
+        if(this.property.predictionEur){
+          this.property.prediction =this.property.predictionEur;
+          this.currency = currency;
+        }else{
+          this.propertyService.convertCurrency(this.property.predictionUs,from,to).subscribe((res: any) => {
+            this.property.predictionEur =res.amount;
+            this.property.prediction=this.property.predictionEur;
+            this.currency = currency;
+          });
+        }
+
+      }
+      
+      
   
+  
+  
+    } 
   
 
 

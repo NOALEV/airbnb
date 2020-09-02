@@ -20,7 +20,7 @@
         }
         .swiper-slide{              
             text-align: center;
-         
+            padding-bottom: 66.25%;
             position: relative;
             overflow: hidden;  
             background: rgba(0, 0, 0, 0.04);          
@@ -32,8 +32,8 @@
             width: 100%;
             height: auto;
             &.empty{
-                width: 290px;
-                 height:192px; 
+                width: 313px;
+                 height:207px; 
             }
         } 
     }

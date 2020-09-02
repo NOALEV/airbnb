@@ -31,8 +31,8 @@ export class SubmitPropertyComponent implements OnInit {
   public cities = [];
   public neighborhoods = [];
   public streets = [];
-  public lat: number = 40.678178;
-  public lng: number = -73.944158;
+  public lat: number =	52.531677;
+  public lng: number = 13.381777;
   public zoom: number = 12;  
   public chartsSettings: HChartsSettings;
   public airbnbProperties: Property[];
@@ -124,8 +124,7 @@ export class SubmitPropertyComponent implements OnInit {
   private setCurrentPosition() {
     if("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => { 
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude; 
+        
       });
     }
   }

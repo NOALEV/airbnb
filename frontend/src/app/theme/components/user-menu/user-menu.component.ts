@@ -42,7 +42,7 @@ export class UserMenuComponent implements OnInit {
  {
   let user:User;
   user= JSON.parse( localStorage.getItem('user')) ;
-return user ?user.imageUrl :"";
+  return user ?user.imageUrl :"assets/images/others/user.jpg";
 
  }
   

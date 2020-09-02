@@ -8,7 +8,7 @@
 <mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before"  class="app-menu-panel user-menu" >
     <span (mouseleave)="userMenuTrigger.closeMenu()">
         <div fxLayout="row" fxLayoutAlign="start center" class="user-info" *ngIf="getUser()">                   
-            <img src="{{getPic()}}" appImgFallback  alt="user-image" width="50">
+            <img src="{{getPic() ||'assets/images/others/user.jpg'}}"  appImgFallback  alt="user-image" width="50">
             <p class="m-0" *ngIf="getUser()">{{getUser().username}}<br> <small><i></i></small></p>
         </div>
         <div class="divider"></div>

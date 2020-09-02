@@ -423,14 +423,13 @@ app.post('/property',  (req, res) => {
 app.patch('/properties/:id', (req, res) => {
     // We want to update the specified apartment (list document with id in the URL) with the new values specified in the JSON body of the request
     let body = req.body.values;
-    console.log(body.address.neighborhood.name);
+    
     Property.findOne({ _id: req.params.id } 
     ).then((property) => {
         property.title=body.basic.title;
         property.desc=body.basic.desc;
         property.propertyType=body.basic.propertyType.name;
         property.roomType=body.basic.roomType.name;
-        property.neighborhood=body.address.neighborhood.name;
 
         property.cancellationPolicy=body.basic.cancellationPolicy?body.basic.cancellationPolicy.name:"";
         property.location=body.address.location;

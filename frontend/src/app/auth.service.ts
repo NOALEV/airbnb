@@ -17,7 +17,6 @@ export class AuthService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        console.log(res.body);
         if(!res.body.imageUrl)
         {
           res.body.imageUrl="assets/images/others/user.jpg";

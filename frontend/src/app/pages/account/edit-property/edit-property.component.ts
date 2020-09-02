@@ -177,8 +177,7 @@ export class EditPropertyComponent implements OnInit {
   private setCurrentPosition() {
     if("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => { 
-        this.lat = position.coords.latitude;
-        this.lng = position.coords.longitude; 
+      
       });
     }
   }

@@ -13,8 +13,9 @@ name = "aviya"
 import pickle, json, sys
 
 # Load model
-
 pkl = open('C:\\Users\\noaal\\OneDrive\\שולחן העבודה\\airbnb_final\\api\\algorithem\\model.pkl', 'rb')
+
+
 model = pickle.load(pkl)
 pkl.close()
 
@@ -28,7 +29,7 @@ pkl.close()
 
 # Value meaning                                      Example
 # ------------------------------------------------------------
-# accommodates                                       3 
+# accommodates                                       3
 # bedrooms                                           1
 # bathrooms                                          1
 # Kitchen                                            1
@@ -71,11 +72,10 @@ pkl.close()
 # cancellation_policy_super_strict_30                0
 # cancellation_policy_super_strict_60                0
 
-data = [
-  [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0]
-]
-data=[[2,2,2,0,0,0,1,0,0,0,0,1,0,0,1,0,0,1,1,0,1,1,0,0,1,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0]]
-print(sys.stdin.readline()[0])
+#data = [
+#    [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0]
+#]
+
 data = json.loads(sys.stdin.readlines()[0])
 
 # The output is in US dollars
@@ -85,7 +85,7 @@ print(json.dumps(model.predict(data).tolist()))
 #data = [
 #    [3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0],
 #    [2, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-#    [4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0]
+	#    [4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0]
 #]
 
 # Predictions are in the same order as the inputs

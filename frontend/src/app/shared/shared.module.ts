@@ -52,7 +52,7 @@ import { ChartsModule } from 'ng2-charts';
 
 import { HeaderImageComponent } from './header-image/header-image.component';
 import { HeaderCarouselComponent } from './header-carousel/header-carousel.component';
-import { PropertyItemComponent } from './property-item/property-item.component';
+
 import { LoadMoreComponent } from './load-more/load-more.component';
 import { PropertiesToolbarComponent } from './properties-toolbar/properties-toolbar.component';
 import { PropertiesSearchComponent } from './properties-search/properties-search.component';
@@ -69,6 +69,7 @@ import { MissionComponent } from './mission/mission.component';
 import { OurServicesComponent } from './our-services/our-services.component';
 import { LogoComponent } from './logo/logo.component';
 import { ChartComponent } from './chart/chart.component';
+import { PropertyItemComponent } from './property-item/property-item.component';
 
 @NgModule({
   imports: [

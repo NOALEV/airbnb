@@ -7,7 +7,7 @@
         </div>
         <div >
             <div *ngIf="!property.images || !property.images.length" class="mat-card-image  w-100 m-0">
-                <img class="empty" width="290" height="192" src="https://www.theblock.co.il/wp-content/uploads/2019/01/תמונה-בית-279x220.jpg">
+                <img class="empty"  src="https://www.theblock.co.il/wp-content/uploads/2019/01/תמונה-בית-279x220.jpg">
             </div>
            
             <div *ngIf="property.images && property.images.length == 1" class="mat-card-image w-100 m-0">
@@ -64,8 +64,20 @@
             <div class="sticky-footer-helper" fxFlex="grow"></div>
             <mat-card-actions class="m-0 p-0" fxLayoutAlign="space-between center"> 
                 
-                <button *ngIf="!property.fromKaggle"  mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="predictionButton()">Prediction
+                <button *ngIf="!property.fromKaggle && !property.getPrediction"  mat-raised-button color="primary" fxLayout="row" fxLayoutAlign="center center" (click)="predictionButton()">Prediction
                   </button>
+                  <div *ngIf="property.getPrediction" style="display:inline" >
+                     <span style="color: tomato; font-size: xx-large;font-weight:bolder">{{property.prediction | number :'1.0-2'}} </span> 
+                     <mat-form-field appearance="outline" class="w-120px">
+                         
+                        <mat-select formControlName="currency" placeholder="USD" >
+                            <mat-option *ngFor="let cur of currencies" [value]="currency" (click)="changeCurrency(cur)">
+                                {{cur}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    
+                  </div>
             </mat-card-actions> 
         </div>    
             
