@@ -554,19 +554,17 @@ app.get('/predict/:propertyId/:_userId', (req, res) => {
        predict_process.stdout.on('data', function (data) {
         var body ={'amount':JSON.parse(data.toString())[0]}
         res.status(200).send(body);
-           res.send(JSON.parse(data.toString())[0]);
        });
        
        predict_process.stderr.on('data', function (data) {
         console.log("err:" + data )
     });
        /* Send inputs to process */
-       console.log(JSON.stringify(input_array));
+      
        predict_process.stdin.write(JSON.stringify(input_array));
        predict_process.stdin.end();
    }).catch((e) => {
        console.log(e);
-      res.send(e);
        
    });
 })
