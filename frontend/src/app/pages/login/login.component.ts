@@ -97,6 +97,7 @@ export class LoginComponent implements OnInit {
        this.authService.signup(user).subscribe((res: HttpResponse<any>) => {
         
          var authUser ={
+          email: profile.getEmail(),
           username:profile.getEmail(), 
           password:profile.getId(),
           rememberMe:false,
@@ -149,13 +150,16 @@ export class LoginComponent implements OnInit {
                 username:userInfo.first_name + " " + userInfo.last_name, 
                 email:userInfo.email,
                 password:userInfo.id 
+                
              }; 
               
              this.authService.signup(user).subscribe((res: HttpResponse<any>) => {
                var authUser ={
+                email:userInfo.email, 
                 username:userInfo.email, 
                 password:userInfo.id ,
                 rememberMe:false
+                
                }
                this.onLoginFormSubmit(authUser,true);
               

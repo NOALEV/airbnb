@@ -136,11 +136,11 @@ app.post('/users', (req, res) => {
     }).then((userFind) => {
         if (userFind) {
             
-            let username = newUser.email;
+            let email = newUser.email;
             let password =newUser.password;
         
         
-            User.findByCredentials(username, password).then((user) => {
+            User.findByCredentials(email, password).then((user) => {
                 return user.createSession().then((refreshToken) => {
                     // Session created successfully - refreshToken returned.
                     // now we geneate an access auth token for the user
