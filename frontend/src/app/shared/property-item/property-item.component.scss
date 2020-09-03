@@ -64,8 +64,8 @@
             margin-left: -4px;
         }
         .text{
-            white-space: nowrap;
-            overflow: hidden;
+            white-space: pre-wrap;
+            overflow: visible;
             text-overflow: ellipsis;
         }
     }  

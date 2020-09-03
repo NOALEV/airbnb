@@ -37,27 +37,33 @@
         <div fxLayout="column" fxLayoutAlign="start stretch" class="h-100">
             <mat-card-content class="mb-0">
               
-                <h1  *ngIf="property.fromKaggle" class="title">{{property.title}}</h1>
+                <h1  *ngIf="property.fromKaggle" title="{{property.title}}" class="title text-truncate" (click)="openWindow(property)">{{property.title}}</h1>
                 <h1 *ngIf="!property.fromKaggle" class="title"><a [routerLink]="['/account/my-properties']">{{property.title}}</a></h1>
 
                 <p fxLayout="row" class="address">
-                    <mat-icon class="text-muted">location_on</mat-icon>
-                    <span class="text">{{property.location}}</span>
+                    <mat-icon *ngIf="!property.fromKaggle" class="text-muted">location_on</mat-icon>
+                    <span  class="text">{{property.location}}</span>
                 </p>
 
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                
-                    <app-rating [ratingsCount]="property.ratingsCount" [ratingsValue]="property.ratingsValue"></app-rating>
                 </div>
 
                 <div *ngIf="viewType=='list' && fullWidthPage" fxShow="false" fxShow.gt-sm class="mt-3"> 
                     <p>{{property.desc}}</p>
                 </div>
 
-                <div class="features mt-3">                    
+                <div class="features mt-3"> 
+                   
+ 
+                     <span *ngIf="property.fromKaggle" >PropertyType- </span><span  *ngIf="property.fromKaggle">  {{property.propertyType}}</span>
+
                     <p><span>Bedrooms</span><span>{{property.bedrooms}}</span></p>
-                    <p><span>Bathrooms</span><span>{{property.bathrooms}}</span></p>
-                    <p><span>Accommodates</span><span>{{property.accommodates}}</span></p>
+                    <p *ngIf="!property.fromKaggle" ><span>Bathrooms</span><span >{{property.bathrooms}}</span></p>
+                    <p ><span>Accommodates</span><span>{{property.accommodates}}</span></p>
+
+                    <p *ngIf="property.fromKaggle"><span>Price for night</span><span>{{property.priceForNight}}</span></p>
+
                 </div> 
 
             </mat-card-content>

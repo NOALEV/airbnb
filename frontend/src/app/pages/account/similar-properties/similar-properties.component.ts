@@ -52,6 +52,8 @@ export class SimilarPropertiesComponent implements OnInit {
       id: entity.id,
       title: entity.name,
       desc: entity.description,
+      priceForNight: entity.price,
+      accommodates: entity.accommodates,
       propertyType: entity.property_type,
       bedType: entity.bed_type,
       area: {
@@ -71,6 +73,7 @@ export class SimilarPropertiesComponent implements OnInit {
       yearBuilt: 2018,
       images: [{ data: entity.picture_url }],
       lastUpdate: entity.calendar_updated,
+      listingUrl:entity.listing_url
     } as unknown as Property
   
     return prop;

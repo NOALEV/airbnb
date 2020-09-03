@@ -71,7 +71,10 @@ export class PropertyItemComponent implements OnInit {
       // }      
     }  
   }
-
+  openWindow(property){
+    window.open(property.listingUrl,"_blank")
+    }
+    
   public getColumnCount(value){
     if(value == 25){
       this.column = 4;

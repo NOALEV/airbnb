@@ -1,5 +1,6 @@
 export class Property {
     constructor(public _id: string,
+        public priceForNight: number,
         public _userId: string,
         public title: string,
         public desc: string,
@@ -14,6 +15,7 @@ export class Property {
         public city: string,
         public zipCode: string[],
         public neighborhood: string[],
+        public lastRent:string,
         public street: string[],
         public location: Location,
         public formattedAddress: string,
@@ -32,6 +34,7 @@ export class Property {
         public priceDollar: PriceDollar,
         public published: string,
         public lastUpdate: string,
+        public listingUrl:string
     ) { }
 }
 
