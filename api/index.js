@@ -211,11 +211,11 @@ sgMail.send(msg)
  */
 app.post('/users/login', (req, res) => {
     let body=req.body;
-    let username = body.values.username;
+    let email = body.values.email;
     let password =body.values.password;
-   
+   console.log(body);
 
-    User.findByCredentials(username, password).then((user) => {
+    User.findByCredentials(email, password).then((user) => {
         return user.createSession().then((refreshToken) => {
             // Session created successfully - refreshToken returned.
             // now we geneate an access auth token for the user
@@ -293,7 +293,6 @@ app.get('/getAirbnbPropertiesByParams/:propertyType/:bedrooms', (req, res) => {
            
     }).sort({ viewCount: -1 }).limit(10)
         .then((properties) => {
-            console.log(properties.length);
             res.send(properties);
         }).catch((e) => {
             res.send(e);
@@ -301,14 +300,12 @@ app.get('/getAirbnbPropertiesByParams/:propertyType/:bedrooms', (req, res) => {
 })
 
 app.get('/getAirbnbPropertiesByNeighbourhood/:neighbourhood', (req, res) => {
-    console.log(req.params.neighbourhood);
         
     AirbnbProperty.find({
         neighbourhood: req.params.neighbourhood,
       
            
     }).limit(500).then((properties) => {
-            console.log(properties.length);
             res.send(properties);
         }).catch((e) => {
             res.send(e);
@@ -321,7 +318,6 @@ app.get('/getAirbnbPropertiesByLatAndLng/:lat/:lng', (req, res) => {
     AirbnbProperty.find(
                 
     ).limit(2000).then((properties) => {
-            console.log(properties.length);
             res.send(properties);
         }).catch((e) => {
             res.send(e);

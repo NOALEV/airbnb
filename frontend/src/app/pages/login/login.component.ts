@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { emailValidator } from 'src/app/theme/utils/app-validators';
 import {User} from 'src/app/models/user.model';
 import {UserService} from 'src/app/user.service';
 
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
     this.googleSDK();
     this.fbLibrary();
     this.loginForm = this.fb.group({
-      username: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
+      email: ['', Validators.compose([Validators.required, emailValidator])],
       password: [null, Validators.compose([Validators.required, Validators.minLength(6)])],
       rememberMe: false
     });
