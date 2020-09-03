@@ -167,7 +167,7 @@ app.post('/users', (req, res) => {
             newUser.save().then(() => {
 
                 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey('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');
 const msg = {
   to: newUser.email,
   from: 'house.keybnb@gmail.com',
